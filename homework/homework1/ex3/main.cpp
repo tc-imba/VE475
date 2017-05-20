@@ -6,12 +6,22 @@
 
 using namespace std;
 
-int main() {
+mpz_t getRandomInt() {
+    mpz_t a;
+    gmp_randstate_t state;
+    gmp_randinit_default(state);
+    mpz_init(a);
+    mpz_urandomb(a, state, 4096);
+    return a;
+}
 
+int main() {
+    auto a=getRandomInt();
     mpz_t a, b;
     gmp_randstate_t state;
     gmp_randinit_default(state);
-    mpz_urandomb(a, 0, 4096);
+    mpz_init(a);
+    mpz_urandomb(a, state, 4096);
     mpz_out_str(stdout, 10, a);
     return 0;
 }

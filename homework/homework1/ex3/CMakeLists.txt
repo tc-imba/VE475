@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
-project(homework1.ex3)
+project(homework1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-find_library(libgmp /usr/lib)
+find_library(libgmp rt /usr/lib)
 
 set(SOURCE_FILES main)
 
-target_link_libraries(homework1.ex3 libgmp)
-add_executable(homework1.ex3 ${SOURCE_FILES})
+add_executable(homework1 ${SOURCE_FILES})
+target_link_libraries(homework1 libgmp.so)
