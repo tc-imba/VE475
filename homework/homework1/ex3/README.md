@@ -2,7 +2,7 @@
 
 ## Compilation
 
-This program is built and tested under Linux (Ubuntu 17.04), with cmake > 3.5, and the GMP Library is used. It can be installed by
+This program is written in c++, built and tested under Linux (Ubuntu 17.04), with cmake > 3.5, and the GMP Library is used. It can be installed by
 ```
 $ apt-get install libgmp-dev
 ```
