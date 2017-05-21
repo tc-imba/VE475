@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{indentfirst}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
+\renewcommand{\thesection}{Ex. \arabic{section} ---}
+\title{VE475 Homework 1}
+\author{Liu Yihao 515370910207}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Simple questions}
+\begin{enumerate}
+\item
+There are totally 26 possibilities of the plain text, which are listed below:
+
+\input{ex1/1.tex}
+
+According to observation, RIVER and ARENA may be the secret place.
+
+\item
+
+
+\item
+Suppose that $n\nmid b$, let $b=cn+d$, $n\nmid d$ and $ab=kn$, where $c,d,k\in N$, then
+$$a(cn+d)=kn$$
+$$ad=(k-ac)n=\frac{ad}{n}n$$
+
+We know $k-ac$ is an integer, so $\dfrac{ad}{n}$ is also an integer. However, since $\gcd(a,n)=1\Rightarrow n\nmid a$ and $n\nmid d$, it makes a contradiction, so $n\mid b$.
+
+\item
+\begin{align*}
+30030&=116\times257+218\\
+257&=1\times218+39\\
+218&=5\times39+23\\
+39&=1\times23+16\\
+23&=1\times16+7\\
+16&=2\times7+2\\
+7&=3\times2+1\\
+2&=2\times1
+\end{align*}
+$$\gcd(30030,257)=1$$
+
+Since $16<\sqrt{257}<17$, so the factors of 257 can only be 2, 3, 5, 7, 11, 13, we can try them one by one. 257 mod 2 = 1, 257 mod 3 = 2, 257 mod 5 = 2, 257 mod 7 = 5, 257 mod 11 = 4, 257 mod 13 = 10. Then we can concluded that 257 is prime.
+
+\item
+If the attacker got the pair of a plaintext and its corresponding ciphertext of length $l$, he can just XOR the plaintext and the ciphertext to get the key of length $l$. When another message ciphered with the same key was sent, the attacker can easily decipher the ciphertext and steal the message. So using the same key twive in the OTP is dangerous.
+
+\item
+Since secure means that the attacker has to compute at least $2^{128}$ operations to break the encrypton, $$\sqrt{n\log n}\geqslant 128$$
+$$n\geqslant4486.43$$
+
+So  a graph with a size of 4487 should be used to be secure.
+
+\end{enumerate}
+
+\section{Vigen\`ere cipher}
+\begin{enumerate}
+\item
+
+\item
+\begin{enumerate}[a)]
+\item
+\item
+\item
+\end{enumerate}
+\end{enumerate}
+
+
+\section{Programming}
+Uploaded to Canvas.
+
+\end{document}
