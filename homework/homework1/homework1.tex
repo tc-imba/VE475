@@ -101,15 +101,31 @@ So  a graph with a size of 4487 should be used to be secure.
 
 \end{enumerate}
 
-\section{Vigen\`ere cipher}
+\section{Vigenère cipher}
 \begin{enumerate}
 \item
+Suppose we have a plaintext of length $l$ and a key of length $n$. First, if $n<l$, we repeat it for several times until it reach a length of $l$. Then, for each letter in the plaintext, we shift it by the value of the key letter of the same index as the letter, using the method similar to Caesar cipher.
+
+For convenience, we obtain a Vigenère square, or Vigenère table, shown in Figure \ref{vigenere}. We can find the encrypted letter at the cross of the plaintext letter and the corresponding key letter.
+
+When we want to decrypt the ciphertext, we can choose the row of the corresponding key letter and find the position of the letter in the ciphertext, then the letter of that column is the plaintext letter in that place.
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.4]{vigenere.png}
+\caption{Vigenère square}
+\label{vigenere}
+\end{figure}
+
 
 \item
 \begin{enumerate}[a)]
 \item
+If the plaintext is a same letter repeating hundreds of times, and the key have a length of $l$, then the ciphertext will have a loop every $l$ letters, it will be very obvious to observe in this circumstance. So Eve can suspect it.
 \item
+Eve can count the letters in each loop and easily find $l=6$.
 \item
+Eve can choose each of 26 letters one by one and compare with the first six letters of the ciphertext. According to the Vigenère square, he can get 26 possible keys with six letters. Since no English word of length six is a shift of another English word, only one of the 26 keys is the correct key, Eve can determine it with the help of an English dictionary.
 \end{enumerate}
 \end{enumerate}
 
