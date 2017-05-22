@@ -26,7 +26,47 @@ There are totally 26 possibilities of the plain text, which are listed below:
 According to observation, RIVER and ARENA may be the secret place.
 
 \item
-
+Since the length of the text is 4, $n$ maybe 2, then we can construct an equation according to the plaintext \emph{dont} and the ciphertext \emph{ELNI}.
+$$
+\begin{pmatrix}3&14\\13&19\end{pmatrix}
+\begin{pmatrix}a&b\\c&d\end{pmatrix}
+\equiv\begin{pmatrix}4&11\\13&8\end{pmatrix}
+{\rm\ mod\ }26
+$$
+$$
+K=\begin{pmatrix}a&b\\c&d\end{pmatrix}\equiv
+\begin{pmatrix}3&14\\13&19\end{pmatrix}^{-1}
+\begin{pmatrix}4&11\\13&8\end{pmatrix}
+{\rm\ mod\ }26
+$$
+$$
+K=\begin{pmatrix}a&b\\c&d\end{pmatrix}\equiv
+\begin{pmatrix}3&14\\13&19\end{pmatrix}^{-1}
+\begin{pmatrix}4&11\\13&8\end{pmatrix}
+{\rm\ mod\ }26
+$$
+$$\det\begin{pmatrix}3&14\\13&19\end{pmatrix}=-125$$
+$$(-125)\cdot(-5)\equiv 1{\rm\ mod\ }26$$
+$$
+K=\begin{pmatrix}a&b\\c&d\end{pmatrix}\equiv
+\begin{pmatrix}-95&70\\65&-15\end{pmatrix}
+\begin{pmatrix}4&11\\13&8\end{pmatrix}
+{\rm\ mod\ }26
+$$
+$$
+K=\begin{pmatrix}a&b\\c&d\end{pmatrix}\equiv
+\begin{pmatrix}9&18\\13&11\end{pmatrix}
+\begin{pmatrix}4&11\\13&8\end{pmatrix}
+{\rm\ mod\ }26
+$$
+$$
+K=\begin{pmatrix}a&b\\c&d\end{pmatrix}\equiv
+\begin{pmatrix}270&243\\195&231\end{pmatrix}
+{\rm\ mod\ }26
+$$
+$$
+K=\begin{pmatrix}10&9\\13&23\end{pmatrix}
+$$
 
 \item
 Suppose that $n\nmid b$, let $b=cn+d$, $n\nmid d$ and $ab=kn$, where $c,d,k\in N$, then
