@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="VE475"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\homework\;CMake Files\homework\homework1\;CMake Files\homework\homework1\ex1\;CMake Files\homework\homework1\ex3\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="homework1.ex1">
+				<Option output="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/homework1.ex1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 homework1.ex1"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="homework1.ex1/fast">
+				<Option output="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/homework1.ex1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 homework1.ex1/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="homework1.ex3">
+				<Option output="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/homework1.ex3" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 homework1.ex3"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="homework1.ex3/fast">
+				<Option output="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/homework1.ex3" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 homework1.ex3/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/disk/Documents/SJTU/VE475/cmake-build-debug/homework/homework1/ex3/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/ex1/main.cpp">
+			<Option target="homework1.ex1"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/ex3/main.cpp">
+			<Option target="homework1.ex3"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/ex1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex1\"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/ex1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex1\"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex3\"/>
+		</Unit>
+		<Unit filename="/disk/Documents/SJTU/VE475/homework/homework1/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex3\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

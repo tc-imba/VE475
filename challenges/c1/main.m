@@ -1,0 +1,1 @@
+read('c1.1.images/img26.jpg');
