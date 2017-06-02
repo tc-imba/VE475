@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{indentfirst}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
+\renewcommand{\thesection}{Ex. \arabic{section} ---}
+\renewcommand{\mod}{{\rm\ mod\ }}
+\title{VE475 Homework 1}
+\author{Liu Yihao 515370910207}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Simple questions}
+\begin{enumerate}
+\item \ 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+& $q_i$ & $r_i$ & $s_i$ & $t_i$\\\hline
+0 & & 17 & 1 & 0\\\hline
+1 & & 101 & 0 & 1\\\hline
+2 & $17\div101=0$ & $17-0\times101=17$ & $1-0\times0=1$ & $0-0\times1=0$\\\hline
+3 & $101\div17=5$ & $101-5\times17=16$ & $0-5\times1=-5$ & $1-5\times0=1$\\\hline
+4 & $17\div16=1$ & $17-1\times16=1$ & $1-1\times-5=6$ & $0-1\times1=-1$\\\hline
+\end{tabular}
+\end{center}
+$$17\cdot6\equiv1\mod101$$
+So the inverse of 17 modulo 101 is 6.
+
+\item
+$$12x\equiv28\mod236$$
+$$3x\equiv7\mod59$$
+$$3x=59k+7\quad k\in Z$$
+First, we can find the solutions in $[0,58]$, try $k=0,1,2$\\
+When $k=0$, $x=\dfrac{7}{3}$. When $k=1$, $x=22$. When $k=1$, $x=\dfrac{125}{3}$.\\
+So $x=59k+22$, $k\in Z$.
+
+\item
+
+\item
+$$\sqrt{4369}<\sqrt{4883}<70$$
+Consider all of the primes in $[2,70]$, they are 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67.\\
+For 4883, first, try to divide 4883 by them one by one, we can find that $4883=19\times 257$. Then, try to divide 257 by 2, 3, 5, 7, 11, 13, all of them have a reminder, so 257 is a prime, $4883=19\times 257$.\\
+For 4369, it's interesting because $4883=4369+2\times257$, so $4369=17\times257$, where 17 and 257 are primes.
+
+\item
+$$A=\begin{pmatrix}3&5\\7&3\\\end{pmatrix}\mod p$$
+When $p=2$, 
+$$A=\begin{pmatrix}1&1\\1&1\\\end{pmatrix}\mod 2$$
+$$\det\begin{pmatrix}1&1\\1&1\\\end{pmatrix}=0$$
+It is not invertible.\\
+
+When $p=3$,
+$$A=\begin{pmatrix}0&2\\1&0\\\end{pmatrix}\mod 3$$
+$$\det\begin{pmatrix}0&2\\1&0\\\end{pmatrix}=-2$$
+It is invertible.\\
+
+When $p=5$,
+$$A=\begin{pmatrix}3&0\\2&3\\\end{pmatrix}\mod 5$$
+$$\det\begin{pmatrix}3&0\\2&3\\\end{pmatrix}=9$$
+It is invertible.\\
+
+When $p=7$,
+$$A=\begin{pmatrix}3&5\\0&3\\\end{pmatrix}\mod 7$$
+$$\det\begin{pmatrix}3&5\\0&3\\\end{pmatrix}=9$$
+It is invertible.\\
+
+When $p>7$,
+$$A=\begin{pmatrix}3&5\\7&3\\\end{pmatrix}\mod 7$$
+$$\det\begin{pmatrix}3&5\\7&3\\\end{pmatrix}=-26$$
+It is invertible.\\
+
+So when $p=2$, it is not invertible.
+
+\item
+\begin{align*}
+2^{2017}&\equiv 2\cdot 4^{1008}\mod 5\\
+&\equiv 2\cdot (-1)^{1008}\mod 5\\
+&\equiv 2\mod 5\\
+2^{2017}&\equiv 2\cdot 64^{336}\mod 13\\
+&\equiv 2\cdot (-1)^{336}\mod 13\\
+&\equiv 2\mod 13\\
+2^{2017}&\equiv 4\cdot 32^{403}\mod 31\\
+&\equiv 4\cdot 1^{403}\mod 31\\
+&\equiv 4\mod 31
+\end{align*}
+\begin{align*}
+5\cdot13&\equiv 3\mod 31\\
+65\cdot-10&\equiv 1\mod 31\\
+13\cdot31&\equiv 3\mod 5\\
+403\cdot2&\equiv 1\mod 5\\
+5\cdot31&\equiv -1\mod 13\\
+155\cdot-1&\equiv 1\mod 13
+\end{align*}
+\begin{align*}
+2^{2017}&\equiv -650\cdot4+806\cdot2-155\cdot2\mod 2015\\
+&\equiv -1298\mod 2015\\
+&\equiv 717\mod 2015\\
+\end{align*}
+
+\item
+According to Assignment 1/Ex. 1/3, let $a$, $b$ and $n$ be three positive integers such that $n\mid ab$ and $\gcd(a,n)=1$, we can prove that $n\mid b$.\\
+Now let $n=p$, since $p$ is a prime, we know $\gcd(a,p)=1$ or $\gcd(a,p)=p$. If $\gcd(a,p)=1$, according to the 
+
+
+\end{enumerate}
+
+\end{document}

@@ -301,3 +301,5 @@ CTestTestfile.cmake
 
 .idea
 cmake-build-debug
+*.tar
+*.tar.gz
