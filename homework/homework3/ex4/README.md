@@ -1,0 +1,33 @@
+# Ex.4 Readme File
+
+## Compilation
+
+This program is written in c, built and tested under Linux (Ubuntu 17.04), with cmake > 3.5
+
+You can generate the Makefile by
+```
+$ sudo apt-get install cmake
+$ cmake ./
+```
+You need to generate it yourself due to some cross-platform issues. (You can also use the Makefile in this directory, but perhaps it won't work)
+
+## Description
+
+This is a complete implementation of AES (both encryption and decryption). There are two functions exported to be used:
+
+```
+uint8_t *aes_encode(const uint8_t text[0x10], const uint8_t key[0x10]);
+uint8_t *aes_decode(const uint8_t text[0x10], const uint8_t key[0x10]);
+```
+
+You may find some information about the functions in the header file (`aes.h`).
+
+Note that this is only a naive implementation of plaintext with exactly 128 bits, in a unsigned char pointer of size 16. In the main file, a simple test is applied: (all of the data is in hex)
+
+The plaintext is `0123456789abcdeffedcba9876543210`
+
+The key is `0f470caf15d9b77f71e8ad67c959d698`
+
+The ciphertext is `53c4bd0eb56b174f1d6b97c7424df219`
+
+The decrypted text is `0123456789abcdeffedcba9876543210` (the same as plaintext)

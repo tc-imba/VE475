@@ -9,7 +9,7 @@ void aes_print(uint8_t bytes[0x10])
     for (int i = 0; i < 16; i++)
     {
         printf("%02x\t", bytes[i]);
-        if (i % 4 == 3) printf("\n");
+        //if (i % 4 == 3) printf("\n");
     }
     printf("\n");
 }
@@ -93,7 +93,7 @@ void shift_rows_inv(uint8_t bytes[0x10])
     bytes[0xF] = temp;
 }
 
-#define AES_MULTI_TWO_MACRO(a) (((a) >= 0x80) ? (((a) << 1) ^ 0x1B) : ((a) << 1))
+#define AES_MULTI_TWO_MACRO(a) (AES_MULTI_TWO[(a)])
 #define AES_MULTI_THREE_MACRO(a) (AES_MULTI_TWO_MACRO(a) ^ (a))
 #define AES_MULTI_FOUR_MACRO(a) (AES_MULTI_TWO_MACRO(AES_MULTI_TWO_MACRO(a)))
 #define AES_MULTI_FIVE_MACRO(a) (AES_MULTI_FOUR_MACRO(a) ^ (a))
@@ -144,6 +144,10 @@ void mix_columns_inv(uint8_t bytes[0x10])
 #undef AES_MIX_COLUMN_MACRO
 #undef AES_MULTI_TWO_MACRO
 #undef AES_MULTI_THREE_MACRO
+#undef AES_MULTI_FOUR_MACRO
+#undef AES_MULTI_FIVE_MACRO
+#undef AES_MULTI_SIX_MACRO
+#undef AES_MULTI_EIGHT_MACRO
 
 void add_round_key(uint8_t bytes[0x10], uint8_t key[0x10])
 {
@@ -165,11 +169,20 @@ void add_round_key(uint8_t bytes[0x10], uint8_t key[0x10])
     bytes[0xF] ^= key[0xF];
 }
 
+uint8_t *transform_bytes(const uint8_t bytes[0x10])
+{
+    uint8_t *bytes2 = malloc(0x10 * sizeof(uint8_t));
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
+            bytes2[i * 4 + j] = bytes[j * 4 + i];
+    return bytes2;
+}
+
 uint8_t **generate_round_key(const uint8_t key[0x10])
 {
     uint8_t **round_key = malloc(11 * sizeof(uint8_t *));
-    for (int i = 0; i < 11; i++) round_key[i] = malloc(0x10 * sizeof(uint8_t));
-    memcpy(round_key[0], key, 0x10);
+    round_key[0] = transform_bytes(key);
+    for (int i = 1; i < 11; i++) round_key[i] = malloc(0x10 * sizeof(uint8_t));
     for (int i = 1; i < 11; i++)
     {
         round_key[i][0x0] = round_key[i - 1][0x0] ^ (AES_SBOX[round_key[i - 1][0x7]] ^ AES_RCON[i]);
@@ -196,8 +209,7 @@ void free_round_key(uint8_t **round_key)
 uint8_t *aes_encode(const uint8_t text[0x10], const uint8_t key[0x10])
 {
     uint8_t **round_key = generate_round_key(key);
-    uint8_t *bytes = malloc(0x10 * sizeof(uint8_t));
-    memcpy(bytes, text, 0x10);
+    uint8_t *bytes = transform_bytes(text);
     add_round_key(bytes, round_key[0]);
     for (int i = 1; i <= 9; i++)
     {
@@ -210,14 +222,15 @@ uint8_t *aes_encode(const uint8_t text[0x10], const uint8_t key[0x10])
     shift_rows(bytes);
     add_round_key(bytes, round_key[10]);
     free_round_key(round_key);
-    return bytes;
+    uint8_t *bytes2 = transform_bytes(bytes);
+    free(bytes);
+    return bytes2;
 }
 
 uint8_t *aes_decode(const uint8_t text[0x10], const uint8_t key[0x10])
 {
     uint8_t **round_key = generate_round_key(key);
-    uint8_t *bytes = malloc(0x10 * sizeof(uint8_t));
-    memcpy(bytes, text, 0x10);
+    uint8_t *bytes = transform_bytes(text);
     add_round_key(bytes, round_key[10]);
     for (int i = 1; i <= 9; i++)
     {
@@ -230,6 +243,8 @@ uint8_t *aes_decode(const uint8_t text[0x10], const uint8_t key[0x10])
     sub_bytes_inv(bytes);
     add_round_key(bytes, round_key[0]);
     free_round_key(round_key);
-    return bytes;
+    uint8_t *bytes2 = transform_bytes(bytes);
+    free(bytes);
+    return bytes2;
 }
 
