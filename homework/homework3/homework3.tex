@@ -287,12 +287,34 @@ At last, we apply a reverse transformation, which is shown in the following tabl
 The decryption method is actually the same as the encryption method, we need only reverse the order of $K_i$.
 
 \item
+Linear cryptanalysis:
+
+There are two parts to linear cryptanalysis. The first is to construct linear equations relating plaintext, ciphertext and key bits whose probabilities of holding are close to 0 or 1. The second is to use these linear equations in conjunction with known plaintext-ciphertext pairs to derive key bits.
+
+Differential cryptanalysis:
+
+The attack discover whether a given input/output difference pattern only occurs for certain values of inputs. Observing the desired output difference (between two chosen or known plaintext inputs) suggests possible key values.
 
 \item
 The safety of double DES is similar to single DES, since it suffers meet-in-the-middle attack. suppose the encryption map relation is $X\rightarrow E(K,X)$, the decryption map relation is $X\rightarrow D(K,X)$, the plaintext is $P$, the ciphertext is $C$, then
 $$C=E(K_2,E(K_1,P))$$
 Suppose the attacker knows a pair of $P$ and $C$, $\exists X$ such that $$X=E(K_1,P)=D(K_2,C)$$
-First, he can try to encrypt $P$ with all of $2^{56}$ values of $K_1$ and get $2^{56}$ values of $X_1$. Then he can decode $C$ with all of $2^{56}$ values of $K_2$ until he get a 
+First, he can try to encrypt $P$ with all of $2^{56}$ values of $K_1$ into $2^{56}$ values of $X_1$. Then he can decode $C$ with all of $2^{56}$ values of $K_2$ into $X_2$ until he find that $X_2$ is identical to one of $X_1$. In this situation, there are $2^{112}$ possible combinations of $K_1,K_2$, so there are $2^{112}/2^{64}=2^{48}$ wrong results.
+
+However, if the attacker knows two pairs of $P$ and $C$, the possibility of wrong result decreases to $2^{48}/2^{64}=2^{-16}$, which is very small. So we can concluded that if a key pair $K_1,K_2$ satisfy both two pairs of $P$ and $C$, they are the actual keys.
+
+With this method, a double DES can be broken in $2^{57}$ operations, which is not considered safe anymore in modern cryptography.
+
+If we use triple DES, we can avoid this kind of attack. Suppose we also use two keys $K_1$ and $K_2$ to apply the encryption and decryption procedure:
+$$C=E(K_1,D(K_2,E(K_1,P)))$$
+$$P=D(K_1,E(K_2,D(K_1,P)))$$
+
+People often use this kind of encryption and decryption method in triple DES because if $K_1=K_2$, the algorithm behaves same as a single DES, which can provide compatibility.
+
+If meet-in-the-middle is applied to triple DES, the time complexity becomes $2^{112}$ to encrypt, which can be considered safe anymore in modern cryptography.
+
+\item
+According to the \emph{man passwd}, The legacy UNIX System encryption method is based on the NBS DES algorithm. User's password will be encrypted and saved to \emph{/etc/passwd}. However, it is a problem that single DES is no longer safe now. So for security, modern Unix based system use more recent methods, such as SHA, to validate the password.
 
 \end{enumerate}
 

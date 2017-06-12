@@ -4,5 +4,8 @@ project(homework3.ex4)
 set(CMAKE_C_STANDARD 11)
 
 set(SOURCE_FILES main.c aes.c)
-
 add_executable(homework3.ex4 ${SOURCE_FILES})
+
+set(SOURCE_FILES sbox.c)
+add_executable(homework3.ex4.sbox ${SOURCE_FILES})
+
