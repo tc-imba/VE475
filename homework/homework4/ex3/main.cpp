@@ -6,6 +6,6 @@
 
 int main()
 {
-    mod_exp(3, 32768, 65537, "2.tex");
+    mod_exp(1801, 4095, 8191, "4.tex");
     return 0;
 }
