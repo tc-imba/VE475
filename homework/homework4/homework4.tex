@@ -33,8 +33,74 @@ When $k=i+1$, we know that there are $p^{i-1}$ integers in $[1,p^i]$ which are n
 According to the mathematical induction above, we can concluded that $$\varphi(p^k)=p^{k-1}(p-1)$$
 
 \item
+According to the Chinese Reminder Theorem, since $m$ and $n$ are coprime, there exists a ring isomorphism between $Z/mnZ$ and $Z/mZ\times Z/nZ$, and here $\varphi(mn)$ is the order of $Z/mnZ$, $\varphi(m)$ is the order of $Z/mZ$ and $\varphi(n)$ is the order of $Z/nZ$. Suppose $MN$ is the set of counted integers in $\varphi(mn)$, $M$ is that in $\varphi(M)$ and $N$ is that in $\varphi(N)$, there is a bijection between $MN$ and $M\times N$. So $\varphi(mn)=\varphi(m)\varphi(n)$.
+
+\item
+Suppose $$n=p_1^{k_1}p_2^{k_2}\cdots p_n^{k_n}$$ where $p_1,p_2,\cdots,p_n$ are primes and $k_1,k_2,\cdots,k_n\geqslant1$, it is obvious that $p_1^{k_1},p_2^{k_2},\cdots,p_n^{k_n}$ are pairwise coprime, so 
+\begin{align*}
+\varphi(n)&=\varphi(p_1^{k_1})\varphi(p_n^{k_n})\cdots\varphi(p_n^{k_n})\\
+&=p_1^{k_1-1}(p_1-1)p_2^{k_2-1}(p_2-1)\cdots p_n^{k_n-1}(p_n-1)\\
+&=p_1^{k_1}\left(1-\frac{1}{p_1}\right)p_2^{k_2}\left(1-\frac{1}{p_2}\right)\cdots p_n^{k_n}\left(1-\frac{1}{p_n}\right)\\
+&=n\prod_{p|n}\left(1-\frac{1}{p}\right)
+\end{align*}
+
+\item
+$$\varphi(1000)=1000\left(1-\frac{1}{2}\right)\left(1-\frac{1}{5}\right)=400$$
+
+According to Euler's Theorem, since 7 is coprime with 1000, $$7^{400}\equiv1\mod1000$$
+\begin{align*}
+7^{803}&\equiv7^3\mod1000\\
+&\equiv343\mod1000
+\end{align*}
+\end{enumerate}
+
+\section{AES}
+\begin{enumerate}
+\item
+128 bits of 1 is used as the key for round 1.
+\item
+$$K(5)=K(4)\oplus K(1)$$
+\item
+We know for a 4 bit number $X$, $$X\oplus 1111=\overline{X}$$
+We also know $$K(0)=K(1)=K(2)=K(3)=1111$$
+So it's easy to find
+\begin{align*}
+K(10)&=K(9)\oplus K(6)\\
+&=[K(8)\oplus K(5)]\oplus[K(5)\oplus K(2)]\\
+&=K(8)\oplus K(2)\\
+&=\overline{K(8)}\\
+K(11)&=K(10)\oplus K(7)\\
+&=[K(9)\oplus K(6)]\oplus[K(6)\oplus K(3)]\\
+&=K(9)\oplus K(3)\\
+&=\overline{K(9)}
+\end{align*}
+\end{enumerate}
+
+\section{Simple Questions}
+\begin{enumerate}
+\item
+
+\end{enumerate}
 
 
+\section{Primitive root mod 65537}
+\begin{enumerate}
+\item
+Since 65537 is a prime, we can calculate $3^{32768}\mod65537$ and we can find that $3^{32768}\equiv-1\mod65537$ (The calculation is shown in part 2), so $$\left(\frac{3}{65537}\right)=-1$$
+\item
+By applying modular exponentiation, we get the following table.
+\begin{center}
+\begin{tabular}{ccc}
+$i$ & $d_i$ & power mod 65537 \\\hline
+\input{ex5/2}
+\end{tabular}
+\end{center}
+
+So $$3^{32768}\equiv65536\mod65537$$
+$$3^{32768}\not\equiv-1\mod65537$$
+
+\item
+According to Theorem 2.17, we can conclude that 3 is a primitive root mod 65537 because 2 is the only prime factor of 65536 and $3^{(65537-1)/2}\not\equiv1\mod65537$.
 \end{enumerate}
 
 \end{document}
