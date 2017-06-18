@@ -96,7 +96,7 @@ So $$2^{(p-1)/d}\not\equiv1\mod p$$
 We can concluded that 2 is a generator of $U(Z/29Z)$.
 
 \item
-Since 1801 and 8191 are primes, it is a Legendre Symbol, and we can only directly calculate $1801^{4095}\mod8191$ to solve it.
+Since 1801 and 8191 are primes, it is a Legendre Symbol, and we can directly calculate $1801^{4095}\mod8191$ to solve it.
 
 By applying modular exponentiation, we get the following table.
 \begin{center}
@@ -130,18 +130,25 @@ Since $\gcd(n,pq)=1$, according to Chinese Reminder Theorem, we get
 $$n^{p-1}\equiv1\mod pq$$
 
 \item
-If $\left(\dfrac{-3}{p}\right)=1$,
-$$1\equiv(-3)^{(p-1)/2}\mod p$$
-$$1\equiv3k\mod p,k\in Z$$
+\begin{enumerate}[(a)]
+\item Necessity: We know 
+$$\left(\frac{-3}{p}\right)=\left(\frac{-1}{p}\right)\left(\frac{3}{p}\right)=1$$
+First, if $p\equiv1\mod4$, $\left(\frac{-1}{p}\right)=1$, then $\left(\frac{3}{p}\right)=1$. And since $p\not\equiv3\mod4$, $\left(\frac{3}{p}\right)=\left(\frac{p}{3}\right)=1$, so $p\equiv1\mod3$, thus $$p\equiv1\mod12$$
+Second, if $p\equiv3\mod4$, $\left(\frac{-1}{p}\right)=-1$, then $\left(\frac{3}{p}\right)=-1$. And since $p\not\equiv3\mod4$, $\left(\frac{3}{p}\right)=-\left(\frac{p}{3}\right)=-1$, so $p\equiv1\mod3$, thus $$p\equiv7\mod12$$
+In conclusion, $p\equiv1\mod6$, and since $p$ is odd prime, it can be deduced to $p\equiv1\mod3$.
+\item Sufficiency: We know
+$$p\equiv1\mod3$$
+So we can get $$\left(\frac{p}{3}\right)=1$$
+First, if $p\equiv1\mod4$, $$\left(\frac{-3}{p}\right)=\left(\frac{-1}{p}\right)\left(\frac{3}{p}\right)=1\cdot1=1$$
+Second, if $p\equiv3\mod4$, $$\left(\frac{-3}{p}\right)=\left(\frac{-1}{p}\right)\cdot-\left(\frac{3}{p}\right)=-1\cdot-1=1$$
+So it is proved.
+\end{enumerate}
+So $\left(\frac{-3}{p}\right)=1$ if and only if $p\equiv1\mod3$.
 
-
-
-If $p\equiv1\mod3$, and $p$ is an odd prime, then $p\equiv1\mod6$.
-$$x\equiv(-3)^{(p-1)/2}\mod p$$
-$$x^2\equiv 1\mod p$$
-And we know $(-3)^{(p-1)/2}=3k$, $k\in Z$, so
-$$x\equiv 3k\mod p$$
 \item
+Since $\left(\frac{a}{p}\right)=1$,
+$$a^{(p-1)/2}\equiv1\mod p$$
+And we know 2 is a prime factor of $p-1$, so it doesn't satisfy the condition that for all prime factors $q$ of $p-1$, $a^{(p-1)/q}\not\equiv1\mod p$. Then $a$ is not a generator of $F_p^*$.
 
 \end{enumerate}
 
