@@ -79,10 +79,13 @@ K(11)&=K(10)\oplus K(7)\\
 \section{Simple Questions}
 \begin{enumerate}
 \item
-In ECB Mode, each block is encrypted separately with a function $E$ and a key $K$, so the corruption of one block won't influence other blocks, only one block will be decrypted incorrectly.
+In ECB Mode, each block is encrypted separately with a function $E$ and a key $K$, so the corruption of one encrypted block won't influence other blocks, only one block will be decrypted incorrectly.
 
-In CBC Mode, $\setminus$
+In CBC Mode, from the second block, each block is encrypted and xor with the previous encrypted block. If one encrypted block (not the last block) is corrupted, the next block will also be influenced when applied xor with the wrong block, so two blocks will be decrypted incorrectly.
+
 \item
+
+
 
 \item
 Since $p=29$ is a prime, according to Theorem 2.17, we can test the prime factors of $p-1=28$, which are 2 and 7. 
