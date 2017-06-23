@@ -18,6 +18,77 @@
 \begin{document}
 \maketitle
 
+\section{RSA setup}
+\begin{enumerate}
+\item
+In the RSA encryption and decryption, we use $$ed\equiv1\mod\varphi(n)$$
+$$m^{ed}\equiv m\mod\varphi(n)$$
+This is based on the Euler's theorem, which has a condition that $m$ and $n$ be two coprime integers. So it is likely for $n$ to be coprime with $m$.
+\item
+Suppose $k=a\varphi(n)$, $a\in N^*$, and $m<n$.
+\begin{enumerate}[(a)]
+\item
+\begin{align*}
+m^k&\equiv(m^{\varphi(n)})^a\mod n\\
+&\equiv1^a\mod n\\
+&\equiv1\mod n\\
+\end{align*}
+So $$m^k\equiv1\mod p\quad{\rm and}\quad m^k\equiv1\mod q$$
+\item
+First, if $\gcd(m,n)=1$, according to (a), it's obvious that
+$$m^{k+1}\equiv m\mod p\quad{\rm and}\quad m^{k+1}\equiv m\mod q$$
+Second, if $\gcd(m,n)=p$, so $\gcd(m/p,q)=1$
+\begin{align*}
+m^{k+1}&\equiv p\left[\left(\frac{m}{p}\right)^{k+1}\mod q\right]\mod n\\
+&\equiv p\left[\left(\frac{m}{p}\right)^{a(p-1)\varphi(q)+1}\mod q\right]\mod n\\
+&\equiv p\cdot\frac{m}{p}\mod n\\
+&\equiv m\mod n
+\end{align*}
+So $$m^{k+1}\equiv m\mod p\quad{\rm and}\quad m^{k+1}\equiv m\mod q$$
+Third, if $\gcd(m,n)=q$, it is similar to the second case.
+
+We can conclude that for any arbitrary $m$, $m^{k+1}\equiv m\mod p{\rm\ and}\mod q$.
+\end{enumerate}
+\item
+\begin{enumerate}[(a)]
+\item
+We know that $ed\equiv1\mod\varphi(n)$, which means that $ed=k+1$ where $k$ is a multiple of $\varphi(n)$. According to part 2(b), we know that for any arbitrary $m$, $m^{k+1}\equiv m\mod p{\rm\ and}\mod q$, or we can say $m^{k+1}\equiv m\mod n$, so $m^{ed}\equiv m\mod n$,
+\item
+From the previous calculation, we can find that for all $m<n$, no matter $m$ and $n$ are coprime or not, we can both find that $m^{ed}\equiv m\mod n$, so that the RSA encryption and decryption can be performed. So we can conclude that it is not necessary that $\gcd(m,n)=1$.
+\end{enumerate}
+\end{enumerate}
+
+\section{RSA decryption}
+$$n=11413=101\times113$$
+
+So we can find that $p=101$ and $q=113$, and we should calculate $d$ so that $ed\equiv1\mod n$.
+
+$$m\equiv c^d\mod n$$
+
+\section{Breaking RSA}
+
+\section{Programming}
+
+\section{Simple Questions}
+\begin{enumerate}
+\item
+\item
+\item
+\item
+\item
+$$(97-1)=96=2^5\times3$$
+So the generator $x$ should satisfy that 
+$$x^{32}\neq 1\mod 97\quad{\rm and}\quad x^{48}\neq 1\mod 97$$
+$$x^{16}\neq \pm 1,35,61\mod 97$$
+We can find that
+\begin{align*}
+2^{16}&\equiv61\mod97\\
+3^{16}&\equiv61\mod97\\
+4^{16}&\equiv1\mod97\\
+5^{16}&\equiv36\mod97
+\end{align*}
+So the smallest generator of $U(Z/97Z)$ is 5.
+\end{enumerate}
 
 
 \end{document}
