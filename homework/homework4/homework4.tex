@@ -84,8 +84,7 @@ In ECB Mode, each block is encrypted separately with a function $E$ and a key $K
 In CBC Mode, from the second block, each block is encrypted and xor with the previous encrypted block. If one encrypted block (not the last block) is corrupted, the next block will also be influenced when applied xor with the wrong block, so two blocks will be decrypted incorrectly.
 
 \item
-
-
+If IV is incremented by 1 each time, after a reset, the attacker would know the exact value of IV every time and can construct whatever plaintext he want and xor it with IV, and then input it into the block cipher. Then he can compare the ciphertext with the plaintext more efficiently. So it is not CPA secure.
 
 \item
 Since $p=29$ is a prime, according to Theorem 2.17, we can test the prime factors of $p-1=28$, which are 2 and 7. 
@@ -153,6 +152,17 @@ And we know 2 is a prime factor of $p-1$, so it doesn't satisfy the condition th
 \end{enumerate}
 
 \section{Prime vs. irreducible}
+\begin{enumerate}
+\item
+In an integral domain, suppose a prime element $p$ is reducible, so it can be implied as $p=ab$, where $a,b$ are non-zero, non-invertible and not equals to the ring element 1. Let $x=k_1a$, $y=k_2b$, $k_1,k_2\neq 0$, so $x,y\neq 0$. If $b\nmid k_1$ and $a\nmid k_2$, then $ab\nmid k_1a$ and $ab\nmid k_2b$, which means $p\nmid x$ and $p\nmid y$, which makes a contradiction with (*), so we can conclude that any prime element in an integral domain is reducible number is not prime. And since any number $p>1$ is either a prime or
+\item
+In $Z$, suppose an irreducible number $p>1$ is not prime, but it can't be implied as $p=ab$, where $a,b>1$. Suppose $a\mid p$, we can get $a=1$ or $a=p$, which makes a contradiction with (**). So we can conclude that any irreducible integer is prime in $Z$.
+\item
+From (**), we can simply get any prime number is irreducible. So if $p$ is a prime and $p\mid x\cdot y$, $x,y\in Z$, suppose $p\nmid x$ and $p\nmid y$, we can get $p\nmid x\cdot y$, which makes a contradiction. So we (*) is proved, and (**) implies (*).
+\item
+From (*), we know any prime integer is irreducible, if $p$ is a prime and $a|p$, suppose $a\neq1$ and $a\neq p$, then $1<a<p$, but $a|p$ and p is not reducible, which makes a contradiction, so (*) implies (**). And according to part 3, (**) implies (*), we can conclude that (*) and (**) are equivalent for integers.
+\end{enumerate}
+
 
 \section{Primitive root mod 65537}
 \begin{enumerate}

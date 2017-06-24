@@ -20,6 +20,9 @@ void mod_exp(unsigned int m, unsigned int p, unsigned int n, const char* filenam
     unsigned int power = 1;
     auto i = d.size() - 1;
     ofstream out(filename);
+    out << "\\begin{center}" << endl
+        << "\\begin{tabular}{c|c|c}"<<  endl
+        << "$i$ & $d_i$ & power mod " << n << " \\\\\\hline " << endl;
     for (auto &it:d)
     {
         out << i-- << " & " << it << " & $" << power << "^2";
@@ -31,5 +34,7 @@ void mod_exp(unsigned int m, unsigned int p, unsigned int n, const char* filenam
         }
         out << " \\equiv " << power << "$ \\\\" << endl;
     }
+    out << "\\end{tabular}\n\\end{center}" << endl;
+
     out.close();
 }
