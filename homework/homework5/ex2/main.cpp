@@ -7,7 +7,7 @@
 
 int main()
 {
-    ext_euclid(7467, 11413, "1.tex");
-    mod_exp(5859, 7546, 11413, "2.tex");
+    ext_euclid(7467, 11200, "1.tex");
+    mod_exp(5859, 3, 11413, "2.tex");
     return 0;
 }

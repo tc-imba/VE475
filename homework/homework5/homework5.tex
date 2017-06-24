@@ -61,22 +61,22 @@ From the previous calculation, we can find that for all $m<n$, no matter $m$ and
 \section{RSA decryption}
 $$n=11413=101\times113$$
 
-So we can find that $p=101$ and $q=113$, and we should calculate $d$ so that $ed\equiv1\mod n$.\\[-0.5em]
+So we can find that $p=101$ and $q=113$, so $\varphi(n)=11200$, and we should calculate $d$ so that $ed\equiv1\mod \varphi(n)$.\\[-0.5em]
 
 By applying the extended euclidean algorithm,
 \input{ex2/1}
-$$e\cdot-3867\equiv1\mod n$$
-$$e\cdot7546\equiv1\mod n$$
+$$e\cdot3\equiv1\mod \varphi(n)$$
 
-So $d=7546$, then we can apply modulo exponentiation to the equation
+So $d=3$, then we can apply modulo exponentiation to the equation
 $$m\equiv c^d\mod n$$
 \input{ex2/2}
 
-So $m=10101$.
+So $m=1415$.
 
 \section{Breaking RSA}
 
 \section{Programming}
+In the ex3 folder, with a README file inside it.
 
 \section{Simple Questions}
 \begin{enumerate}
