@@ -74,6 +74,28 @@ $$m\equiv c^d\mod n$$
 So $m=1415$.
 
 \section{Breaking RSA}
+\begin{enumerate}
+\item 
+When we decrypt an RSA ciphertext, we use $m\equiv c^d\mod n$. When $d$ is small, the decryption speed will be faster, so one would select short encryption or decryption keys.
+\item
+$$ed\equiv1\mod{\rm lcm}(p-1,q-1)$$
+$$ed=K\cdot{\rm lcm}(p-1,q-1)+1,K\in N$$
+Suppose $G=\gcd(p-1,q-1)$, we can find
+$$ed=\frac{K}{G}(p-1,q-1)+1$$
+Let $k=\dfrac{K}{\gcd(K,G)}$, $g=\dfrac{G}{\gcd(K,G)}$,
+$$ed=\frac{k}{g}(p-1,q-1)+1$$
+$$\frac{e}{pq}=\frac{k}{dg}(1-\lambda),\lambda=\frac{p+q-1-g/k}{pq}$$
+Since $p\approx q\gg0$, $\lambda$ would be very small, then $\dfrac{e}{pq}$ is slightly smaller than $\dfrac{k}{dg}$, and
+$$edg=k(p-1)(q-1)+g$$
+Let $k_0=\dfrac{k}{g}$ we can find
+$$\varphi(n)=(p-1)(q-1)=\frac{ed-1}{k_0}$$
+where $\dfrac{k_0}{d}$ converges to $\dfrac{e}{n}$.\\
+Then we can apply continued fractions to get a list of approximate of $k_0$ and $d$, validate them and get the right $d$ if it is small enough.
+\item
+According to Wiener's theorem, decryption key should be larger than $\dfrac{1}{3}n^{1/4}$. For security considerations, it should be randomly selected from the safe range.
+\item
+
+\end{enumerate}
 
 \section{Programming}
 In the ex3 folder, with a README file inside it.
