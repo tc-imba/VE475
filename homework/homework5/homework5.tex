@@ -105,6 +105,15 @@ In the ex3 folder, with a README file inside it.
 \item
 \item
 \item
+$$4\cdot516107^2-187722^2\equiv0\mod n$$
+$$(2\cdot516107-187722)(2\cdot516107+187722)\equiv0\mod n$$
+$$1219936\cdot844492\equiv0\mod n$$
+$$64866\cdot844492\equiv0\mod n$$
+$$2\cdot3\cdot10811\cdot2^2\cdot211123\equiv0\mod n$$
+We can find that 64866 must have a factor of $n$ since $211123<n$ (suppose n have only two factors according to RSA), and the factorization of 10811 is easy since it's small enough. We can try the primes smaller than $\sqrt{10811}(<104)$ and find that it has a factor 19. Then we can deduce that $10811=19\times569$, where 569 is also a prime.\\
+
+At last we can take 3, 19 and 569 as the possible factors of $n$,  validate them and conclude that
+$$n=642401=569\times1129$$
 \item
 \item
 $$(97-1)=96=2^5\times3$$
