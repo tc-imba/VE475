@@ -90,12 +90,40 @@ $$edg=k(p-1)(q-1)+g$$
 Let $k_0=\dfrac{k}{g}$ we can find
 $$\varphi(n)=(p-1)(q-1)=\frac{ed-1}{k_0}$$
 where $\dfrac{k_0}{d}$ converges to $\dfrac{e}{n}$.\\
-Then we can apply continued fractions to get a list of approximate of $k_0$ and $d$, validate them and get the right $d$ if it is small enough.
+Then we can apply continued fractions to get a list of approximate of $k_0$ and $d$, validate them and get the right $d$ if it is small enough by the equation
+$$x^2-pq+n=0$$
+$$x^2-(n-\varphi(n)+1)+n=0$$
+$$p,q=\frac{n-\varphi(n)+1\pm\sqrt{(n-\varphi(n)+1)^2-4n}}{2}$$
 \item
 According to Wiener's theorem, decryption key should be larger than $\dfrac{1}{3}n^{1/4}$. For security considerations, it should be randomly selected from the safe range.
 \item
-
+We apply continued fraction to $n$ and $e$ and get the following table:
+\begin{center}
+\begin{tabular}{c|ccc}
+$i$ & $a$ & $k_0$ & $d$ \\\hline
+\input{ex3/1}
+\end{tabular}
+\end{center}
 \end{enumerate}
+
+According to Wiener's theorem, $d<\dfrac{1}{3}n^{1/4}<45$, so we can try data from $i=1,2$.\\
+
+First we can guess that $k_0=1$, $d=4$, $$\phi(n)=\frac{ed-1}{k_0}=310148323$$
+$$n-\varphi(n)+1=7791689$$
+$$(n-\varphi(n)+1)^2-4n=60709145712677$$
+
+It is not a square number, so $d$ is wrong.\\
+
+Second we can guess that $k_0=9$, $d=37$, $$\phi(n)=\frac{ed-1}{k_0}=\frac{2868871996}{9}$$
+
+It is not a integer, so $d$ is wrong.\\
+
+Third, we can guess that $k_0=10$, $d=41$, $$\phi(n)=\frac{ed-1}{k_0}=317902032$$
+$$n-\varphi(n)+1=37980$$
+$$(n-\varphi(n)+1)^2-4n=170720356=13066^2$$
+$$p=\frac{37980+13066}{2}=25523$$
+$$q=\frac{37980-13066}{2}=12457$$
+$$n=317940011=25523\times12457$$
 
 \section{Programming}
 In the ex3 folder, with a README file inside it.
