@@ -131,7 +131,11 @@ In the ex3 folder, with a README file inside it.
 \section{Simple Questions}
 \begin{enumerate}
 \item
+
+
 \item
+No, it doesn't. Because the RSA problem is actually a factorization problem. If the attacker succeeded in factoring $n$, no matter how many exponents are chosen, the decryption method is the same.
+
 \item
 $$4\cdot516107^2-187722^2\equiv0\mod n$$
 $$(2\cdot516107-187722)(2\cdot516107+187722)\equiv0\mod n$$
@@ -143,6 +147,8 @@ We can find that 64866 must have a factor of $n$ since $211123<n$ (suppose n hav
 At last we can take 3, 19 and 569 as the possible factors of $n$,  validate them and conclude that
 $$n=642401=569\times1129$$
 \item
+
+
 \item
 $$(97-1)=96=2^5\times3$$
 So the generator $x$ should satisfy that 
@@ -156,6 +162,58 @@ We can find that
 5^{16}&\equiv36\mod97
 \end{align*}
 So the smallest generator of $U(Z/97Z)$ is 5.
+
+\item
+\begin{enumerate}[(a)]
+\item
+$$101-1=100=2^2\times5^2$$
+\begin{align*}
+2^{100/2}&\equiv(2^{10})^5\mod 101\\
+&\equiv14^5\mod 101\\
+&\equiv100\mod 101\\
+2^{100/5}&\equiv(2^{10})^2\mod 101\\
+&\equiv14^2\mod 101\\
+&\equiv95\mod 101
+\end{align*}
+
+Since $2^{50}\not\equiv1\mod101$ and $2^{20}\not\equiv1\mod101$, 2 is a generator of $G$.
+\item
+$$\log_22=1$$
+$$\log_224=\log_23+3\log_22=72$$
+\item
+$$\log_224=\log_2125=3\log_25=72$$
+\end{enumerate}
+
+\item
+$$(137-1)=136=2^3\times17$$
+\begin{align*}
+3^{136/2}&\equiv3^5\cdot(3^{7})^9\mod 137\\
+&\equiv243\cdot(-5)^9\mod 137\\
+&\equiv106\cdot12^3\mod 137\\
+&\equiv106\cdot7\cdot12\mod 137\\
+&\equiv136\mod 137\\
+3^{136/17}&\equiv3^8\mod 137\\
+&\equiv3\cdot-5\mod 137\\
+&\equiv122\mod 137
+\end{align*}
+Since $3^{68}\not\equiv1\mod 137$ and $3^{8}\not\equiv1\mod 137$, 3 is a generator of $U(Z/137Z)$.\\
+$$\log_344=6$$
+$$\log_32=10$$
+$$\log_311=\log_344-2\log_32=-14$$
+So $x=122$.
+\item
+\begin{enumerate}
+\item
+$$6^5\equiv10\mod11$$
+So $6^5=10$ in $U(Z/11Z)$
+\item
+$$(11-1)=10=2\times5$$
+$$2^{10/2}\equiv10\mod 11$$
+$$2^{10/5}\equiv4\mod 11$$
+Since $2^{5}\not\equiv1\mod11$ and $2^{2}\not\equiv1\mod11$, 2 is a generator of $G$.
+\item
+
+\end{enumerate}
 \end{enumerate}
 
 
