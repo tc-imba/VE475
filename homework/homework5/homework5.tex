@@ -131,7 +131,7 @@ In the ex3 folder, with a README file inside it.
 \section{Simple Questions}
 \begin{enumerate}
 \item
-
+We can calculate $c\cdot 2^e\mod n$, and it equals to $2m\mod n$. Since $n$ is odd, if $2m\mod n$ is even, $m=\dfrac{2m\mod n}{2}$; if $2m\mod n$ is odd, $m=\dfrac{(2m\mod n)+n}{2}$.
 
 \item
 No, it doesn't. Because the RSA problem is actually a factorization problem. If the attacker succeeded in factoring $n$, no matter how many exponents are chosen, the decryption method is the same.
@@ -212,8 +212,19 @@ $$2^{10/2}\equiv10\mod 11$$
 $$2^{10/5}\equiv4\mod 11$$
 Since $2^{5}\not\equiv1\mod11$ and $2^{2}\not\equiv1\mod11$, 2 is a generator of $G$.
 \item
-
+\begin{align*}
+2^x&\equiv6\mod 11\\
+2^{5x}&\equiv6^5\mod 11\\
+(-1)^x&\equiv-1\mod 11
+\end{align*}
+So we can find that $x$ is odd.
 \end{enumerate}
+\end{enumerate}
+
+\section{DLP}
+\begin{enumerate}
+\item
+
 \end{enumerate}
 
 
