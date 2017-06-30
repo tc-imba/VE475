@@ -7,7 +7,7 @@
 #include <time.h>
 #include <memory.h>
 
-rsa_key generate(RSA_SECURITY security)
+rsa_key rsa_generate(RSA_SECURITY security)
 {
     rsa_key key;
 
@@ -93,6 +93,12 @@ void rsa_key_free(rsa_key key)
     free(key.d);
     free(key.e);
 }
+
+void rsa_pair_free(rsa_pair pair)
+{
+    free(pair.bytes);
+}
+
 
 void rsa_bytes_print(uint8_t *bytes, size_t size, FILE *stream)
 {

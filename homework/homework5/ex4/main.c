@@ -6,7 +6,7 @@
 
 int main()
 {
-    rsa_key key = generate(RSA_256);
+    rsa_key key = rsa_generate(RSA_128);
     rsa_key_print(key, stdout);
 
     uint8_t m[] = {0x01, 0x23, 0x45, 0x67,
@@ -27,8 +27,8 @@ int main()
     printf("\n");
 
     rsa_key_free(key);
-    free(c.bytes);
-    free(mm.bytes);
+    rsa_pair_free(c);
+    rsa_pair_free(mm);
 
     return 0;
 }
