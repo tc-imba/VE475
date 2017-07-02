@@ -147,7 +147,11 @@ We can find that 64866 must have a factor of $n$ since $211123<n$ (suppose n hav
 At last we can take 3, 19 and 569 as the possible factors of $n$,  validate them and conclude that
 $$n=642401=569\times1129$$
 \item
-
+Thus $$\varphi(n)=(p-1)(q-1)(r-1)$$
+And we should also find $e$ and $d$ such that $$ed\equiv 1\mod\varphi(n)$$
+Then $$c\equiv m^e\mod n$$
+$$c^d\equiv m^{ed}\equiv m^{\varphi(n)+1}\equiv m\mod n$$
+However, if we use the same bits length of $n$ with three prime factors instead of two, the length of each factor will become shorter, so the factorization can be more efficient, and the security is poorer.
 
 \item
 $$(97-1)=96=2^5\times3$$
@@ -224,6 +228,45 @@ So we can find that $x$ is odd.
 \section{DLP}
 \begin{enumerate}
 \item
+\begin{align*}
+3^x&\equiv2\mod 65537\\
+3^{16x}&\equiv-1\mod 65537\\
+3^{32x}&\equiv1\mod 65537\\
+\end{align*}
+And we also know $$3^{65536}\equiv1\mod 65537$$
+So $65536\mid32x$ and $65536\mid16x$, which means $2048\mid x$ and $4096\nmid x$.
+
+\item
+$x$ can be $2048(2k+1)$, where $k=0,1,\dots,15$, so there are 16 possible choices.
+
+First we determine $3^{2048}\mod 65537$ and $3^{63488}\mod 65537$\\
+
+\begin{minipage}{0.4\linewidth}\input{ex6/1}\end{minipage}
+\begin{minipage}{0.4\linewidth}\input{ex6/2}\end{minipage}
+
+$$3^{2048}\equiv -8 \mod 65537$$
+$$3^{2048\cdot31}\equiv 8192 \mod 65537$$
+$$3^{2048\cdot(31-4)}\equiv 2 \mod 65537$$
+
+So $x=2048\cdot27=55296$.
+
+\item
+From Part 1, we know $x\mid2048$ and $x\nmid4096$, so we can set $$x=2^{11}+a_{12}2^{12}+a_{13}2^{13}+a_{14}2^{14}+a_{15}2^{15}$$
+
+Then we can apply the Pohlig-Hellman algorithm.
+
+For $a_{12}$, $$\left(\dfrac{3^x}{3^{2^{11}}}\right)^{2^{15-12}}\equiv (2^{14})^8 \equiv -1\mod65537,\quad a_{12}=1$$
+
+For $a_{13}$, $$\left(\dfrac{3^x}{3^{2^{11}+2^{12}}}\right)^{2^{15-13}}\equiv (2^{8})^4 \equiv 1\mod65537,\quad a_{13}=0$$
+
+For $a_{14}$, $$\left(\dfrac{3^x}{3^{2^{11}+2^{12}}}\right)^{2^{15-14}}\equiv (2^{8})^2 \equiv -1\mod65537,\quad a_{14}=1$$
+
+For $a_{15}$, $$\left(\dfrac{3^x}{3^{2^{11}+2^{12}+2^{14}}}\right)^{2^{15-14}}\equiv -1\mod65537,\quad a_{15}=1$$
+
+So $x=2^{11}+2^{12}+2^{14}+2^{15}=55296$.
+
+\item
+65537 is a prime and is in the form $p^k+1$. Suppose we can make $c^x\equiv p\mod p^k+1$, in order to find $x$ for this kind of prime, we can first determine a generator of it, which is quite easy. And since $c^{2k}\equiv p^{2k}\equiv 1\mod p^k+1$, we can find $p^k/2k\mid x$ and $p^k/k\nmid x$, and there are only $k$ possible choices for $x$, which makes the decryption much more easier. So such primes are not fitting a cryptography context.
 
 \end{enumerate}
 
