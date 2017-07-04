@@ -30,7 +30,7 @@
 \author{
     \textbf{Joint Authors:}\\
     Gu Yichen 5143709162\\
-    Lars Vagnes 5143709\\ 
+    Lars Vagnes 5143709048\\ 
     Liu Yihao 515370910207\\
     Zhu Yifan 5143709016\\
     \normalsize{(In Alphabetic Order)}\\
@@ -39,21 +39,26 @@
     Prof. Charlemagne Manuel\\ \\ \textbf{Course:}\\VE475\\ Introduction to Cryptography\\ \\ \textbf{Institute:}\\University of Michigan - Shanghai Jiao Tong University\\Joint Institute}
 \title{\textbf{Project:\\Message Authentication Code}}
 
-\date{2017-July-1st}
+\date{2017-July-4th}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
 
-\noindent \\
+The goal of this project is to perform some personal study in order to acquire the extra knowledge in cryptography while also improving major skills such as writing, collaboration and public presentation. In this project, we intend to have a preliminary understanding of a method of cryptography: Message Authentication Code. MAC is a short piece of information used to authenticate a message, confirming that the message comes from its authenticity and has not been changed$^{[1]}$.\\
+
+In this project, we first give the brief introduction to cryptography, message authentication and message authentication code in order. Then in the second chapter, we mainly represent two kinds of MAC: MAC based on block ciphers and MAC based on Hash functions. The third chapter is mainly about the MAC security. We discuss the security by both brute-force attack and cryptanalysis. In the fourth chapter, some applications are mentioned and the major one is pseudo-random number generation. We will discuss both PRNG based on Hash function ad PRNG based on MAC function to judge the superiority of MAC.\\
+
+Cryptography is quite a complex and esoteric subject and there are so many mysteries in the world. We just do a simple and shallow survey on the aspect of MAC. There still remains a large number of interesting and profound problems to be solved. The study of cryptography is still pending.\\
+
 \end{abstract}
 
 
 \tableofcontents
 \chapter{  Introduction}
 \section{Introduction to Cryptography}
-The Concise Oxford Dictionary (2006) defines cryptography as the art of writing or solving codes.$^{[2]}$ However, in the late $20^{th}$ century, this picture of cryptography radically changed. A rich theory emerged, enabling the rigorous study of cryptography as a science. Cryptography is now about constructing and analyzing protocols that prevent third parties or the public from reading private messages.$^{[3]}$
+The Concise Oxford Dictionary (2006) defines cryptography as the art of writing or solving codes$^{[2]}$. However, in the late $20^{th}$ century, this picture of cryptography radically changed. A rich theory emerged, enabling the rigorous study of cryptography as a science. Cryptography is now about constructing and analyzing protocols that prevent third parties or the public from reading private messages$^{[3]}$.
 
 \subsection{Classic Cryptography}
 The main classical cipher types are transposition ciphers, which rearrange the order of letters in a message and substitution ciphers, which systematically replace letters or groups of letters with other letters or groups of letters. 
@@ -61,7 +66,7 @@ The main classical cipher types are transposition ciphers, which rearrange the o
 The earliest known use of cryptography is some carved ciphertext on stone in Egypt (ca 1900 BCE), but this may have been done for the amusement of literate observers rather than as a way of concealing information.
 
 \subsection{Modern Cryptography}
-Modern cryptography includes various aspects in information security such as data confidentiality, data integrity, authentication, and non-repudiation.$^{[4]}$ Applications of modern cryptography exist at the intersection of the disciplines of mathematics, computer science, and electrical engineering.
+Modern cryptography includes various aspects in information security such as data confidentiality, data integrity, authentication, and non-repudiation$^{[4]}$. Applications of modern cryptography exist at the intersection of the disciplines of mathematics, computer science, and electrical engineering.
 
 Here are several chief topics of modern cryptography:
 
@@ -74,12 +79,12 @@ Here are several chief topics of modern cryptography:
 \end{itemize}
 
 \section{Introduction to Message Authentication}
-Message authentication is a mechanism or service used to verify the integrity of a message. Message authentication assures that data received contain no modification, insertion, deletion, or replay and that the purported identity of the sender is valid.$^{[5]}$ 
+Message authentication is a mechanism or service used to verify the integrity of a message. Message authentication assures that data received contain no modification, insertion, deletion, or replay and that the purported identity of the sender is valid$^{[5]}$.
 
 
 
 \subsection{Message Authentication Functions}
-Message authentication does not necessarily include the property of non-repudiation.$^{[6][7]}$ and is typically achieved by using message authentication codes (MACs), message encryption (ME) or hash function$^{[5]}$.
+Message authentication does not necessarily include the property of non-repudiation$^{[6][7]}$. and is typically achieved by using message authentication codes (MACs), message encryption (ME) or hash function$^{[5]}$.
 
 \begin{enumerate}[(1)]
     \item \textbf{Hash function:} A function that maps a message of any length into a fixed-length
@@ -100,7 +105,7 @@ parties.
     \item \textbf{Timing modification:} Delay or replay of messages.
 \end{enumerate}
 
-In summary, message authentication is a procedure to verify that received messages come from the alleged source and have not been altered. Message authentication may also verify sequencing and timeliness.$^{[5]}$
+In summary, message authentication is a procedure to verify that received messages come from the alleged source and have not been altered. Message authentication may also verify sequencing and timeliness$^{[5]}$.
 \\
 
 However, there are still a few attacks that message authentication can not deal with. The following are some:
@@ -109,7 +114,7 @@ However, there are still a few attacks that message authentication can not deal 
     \item \textbf{Disclosure:} Release of message contents to any person or process not possessing the appropriate cryptographic key.
     \item \textbf{Traffic analysis:} Discovery of the pattern of traffic between parties.
     \item \textbf{Source repudiation:} Denial of transmission of message by source.
-    \item \textbf{Destination repudiation} Denial of receipt of message by destination.
+    \item \textbf{Destination repudiation:} Denial of receipt of message by destination.
 \end{enumerate}
 
 Measures to deal with the first two attacks are in the realm of message confidentiality and are dealt with in Part One. Mechanisms for dealing specifically with item (3) come under the heading of digital signatures. A digital signature is an
@@ -117,7 +122,7 @@ authentication technique that also includes measures to counter repudiation by t
 
 
 \section{Introduction to Message Authentication Codes}
-A message authentication code (MAC) is an algorithm that takes a variable-length message and a secret key as input and produces an authentication code. A recipient in possession of the secret key can generate an authentication code to verify the integrity of the message.$^{[]}$
+A message authentication code (MAC) is an algorithm that takes a variable-length message and a secret key as input and produces an authentication code. A recipient in possession of the secret key can generate an authentication code to verify the integrity of the message$^{[1]}$.
 
 There are two means of forming a MAC. One is to combine a cryptographic hash table in some fashion with a secret key. Another is to use a symmetric block cipher in such a way that it produces a fixed-length output for a variable-length input.
 
@@ -136,7 +141,7 @@ The first requirement speaks to the example, in which an opponent is able to con
 
 The second requirement deals with the need to thwart a brute-force attack based on chosen plaintext.
 
-The final requirement dictates that the authentication algorithm should not be weaker with respect to certain parts or bits of the message than others.$^{[5]}$
+The final requirement dictates that the authentication algorithm should not be weaker with respect to certain parts or bits of the message than others$^{[5]}$.
 
 \chapter{  MAC Classification}
 \section{MAC Based on Block Ciphers}
@@ -222,7 +227,7 @@ In recent years, there has been increased interest in developing a MAC derived f
 
 A hash function such as SHA does not rely on a secret key, which means that it cannot be used directly. There have been a number of proposals for the incorporation of a secret key into an existing hash algorithm. The approach that has received the most support is HMAC. \\
 
-According to RFC 2104\cite{RFC2104}, HMAC can be used in combination with any iterated cryptographic hash
+According to RFC 2104$^{[9]}$, HMAC can be used in combination with any iterated cryptographic hash
    function. MD5 and SHA-1 are examples of such hash functions. HMAC
    also uses a secret key for calculation and verification of the
    message authentication values. The main goals behind this
@@ -371,17 +376,17 @@ For the MAC value attack, the attacker aim to generate a valid tag for a given m
 To sum up, level of effort for the brute-force attack can be expressed as $\rm{min}(2^k,2^n)$ where $k$ is the key size and $n$ is the code size. The assessment of strength satisfies the security. Therefore, MAC have strong resistance on brute0-force attack.\\
 
 \subsection{Cryptanalysis}
-Cryptanalysis is the study of analyzing information systems in order to study the hidden aspects of the systems. It's used to breach cryptographic security systems and gain access to the contents of encrypted messages, even if the cryptographic key is unknown. Nowadays, we have various attack modes such as Mod-n cryptanalysis, attacking cryptographic hash system, side-channel attack and so on\cite{11}.\\
+Cryptanalysis is the study of analyzing information systems in order to study the hidden aspects of the systems. It's used to breach cryptographic security systems and gain access to the contents of encrypted messages, even if the cryptographic key is unknown. Nowadays, we have various attack modes such as Mod-n cryptanalysis, attacking cryptographic hash system, side-channel attack and so on$^{[8]}$.\\
 
 As with encryption algorithms and hash functions, cryptanalytic attacks on MAC algorithms seek to exploit some property of the algorithm to perform some attack other than an exhaustive search. An ideal MAC algorithm will require a cryptanalytic effort no less than the brute-force effort. However, there is much more variety in the structure of MACs than in hash functions, so it is difficult to generalize about the cryptanalysis of MACs.\\
 
 \chapter{  MAC Application}
 \section{Pseudo-random Number Generation}
-\noindent In this section, we are going to discuss the pseudo-random number generation on the basis of hash function and MAC. A seed value and a deterministic algorithm for generating a stream of pseudo-random bits are two essential elements of any pseudo-random number generator abbreviated as PRNG.\\
-\\
-\noindent If a required value, such as a session key, is produced by the algorithm which is used as a pseudo-random function (PRF), then only the user of PRF can know the seed value. What's more,  if the algorithm is used to produce a stream encryption function such that $C = c_1c_2...c_n = E_{k_1}(m_1)E_{k_2}(m_2)...E_{k_n}(m_n)$ where $E$ are different blocks and $k_1k_2...k_n$ is a key stream, then both the sender and the receiver should know the seed value the seed which plays the role of a secret key.\\
-\\
-\noindent Since either a hash function or MAC produces an apparently random output, it can serve as the basis of PRNG. Both ISO standard 18031 (Random Bit Generation) and NIST SP 800-90 (Recommendation for Random Number Generation Using Deterministic Random Bit Generators) define an approach for random number generation using a cryptographic hash function. In addition, SP 800-90 defines a random number generator based on HMAC$^{[1]}$. We will discuss there two approaches in the following subsections detailedly.\\
+In this section, we are going to discuss the pseudo-random number generation on the basis of hash function and MAC. A seed value and a deterministic algorithm for generating a stream of pseudo-random bits are two essential elements of any pseudo-random number generator abbreviated as PRNG.\\
+
+If a required value, such as a session key, is produced by the algorithm which is used as a pseudo-random function (PRF), then only the user of PRF can know the seed value. What's more,  if the algorithm is used to produce a stream encryption function such that $C = c_1c_2...c_n = E_{k_1}(m_1)E_{k_2}(m_2)...E_{k_n}(m_n)$ where $E$ are different blocks and $k_1k_2...k_n$ is a key stream, then both the sender and the receiver should know the seed value the seed which plays the role of a secret key.\\
+
+Since either a hash function or MAC produces an apparently random output, it can serve as the basis of PRNG. Both ISO standard 18031 (Random Bit Generation) and NIST SP 800-90 (Recommendation for Random Number Generation Using Deterministic Random Bit Generators) define an approach for random number generation using a cryptographic hash function. In addition, SP 800-90 defines a random number generator based on HMAC$^{[1]}$. We will discuss there two approaches in the following subsections detailedly.\\
 
 \subsection{PRNG Based on Hash Function}
 For the algorithm based on the hash function, we have some pseudo-code. We need to input the seed $V$ with $seedlen$ which is the bit length of $V$. Notice that $V \geq k+64$ where $k$ is the security level expressed in bits. We also need to input $outlen$ which is the bit length of Hash value and the desired number of bits $n$ for the output. Thus we can get a random number of $n$ bits due to the following  Random Generator Function. Through the code we can find the pseudorandom bit stream $w_1 \mid \mid w_2 \mid \mid ... \mid \mid w_m$.\\
@@ -524,7 +529,7 @@ For HMAC TLS/WTLS:
     \end{algorithmic}  
 \end{algorithm}
 
-
+\newpage
 In HMAC NIST SP 800-90 the combination of $K$ and $V$ form the overall seed for the PRNG. The key remains the same for each block of output, and the data input for each block is equal to the tag output of the previous block. It provides for periodically updating $K$ and $V$ to enhance security.\\
 
 
@@ -536,25 +541,29 @@ In HMAC Transport Layer Security protocol and the Wireless Transport Layer Secur
 
 \chapter{  Conclusion and Discussion}
 \section{Discussion}
+In this project, we have searched a lot about the message authentication codes. We found that there are two different types of MACs, one is based on hash functions called HMAC, another is based on block ciphers called CMAC, which replaced DAA. DAA used to be widely adopted in government and industry, but it was abandoned ruthlessly. Thus we can see that everything keeps changing. Maybe one day HMAC or CMAC will be found insecure and we may create a newer and stronger algorithm to replace HMAC or CMAC. Also, we found something interesting called authentication encryption. It belongs to message authentication, just like message authentication codes, so we did extra research on it. In brief, our team learned a lot according to this project, and expand one's horizon on the vast field of cryptography.\\
 
 \section{Conclusion}
-
+In this project, we have made the study of MAC in order to acquire the extra knowledge in cryptography. What's more, our major skills such as writing and collaboration haven been improved as well. We have had a preliminary understanding of Message Authentication Code thanks for this subject. We have understood what MAC is, how MAC works, how secure MAC is, and some applications of MAC. The superiority of MAC is represented throughout whole the project. Cryptography is quite a complex and esoteric subject and there are so many mysteries in the world. But we still have enough enthusiasm to explore the secrets in the world of cryptography. The study of cryptography is still pending.\\
 
 
 \chapter{  Bibliography}
+\noindent [1] Forouzan, Behrouz A., and D. A. College. "Cryptography and Network Security." volume 11.7(2008):655-660.\\
 
-\bibliographystyle{plain}
-\begin{thebibliography}{0}
-\bibitem{1}Hohberger, Horst. "Term Project." 2015. PDF file.
-\bibitem{2}Jonathan, Katz; Yehuda, Lindell. "Introduction to Modern Cryptography". 2007. Jonathan Katz and Yehuda Lindell. 
-\bibitem{3}Bellare, Mihir; Rogaway, Phillip (21 September 2005). "Introduction". Introduction to Modern Cryptography. p. 10.
-\bibitem{4}Menezes, A. J.; van Oorschot, P. C.; Vanstone, S. A. Handbook of Applied Cryptography. ISBN 0-8493-8523-7. Archived from the original on 7 March 2005.
-\bibitem{5}William, Stallings. "CRYPTOGRAPHY AND NETWORK SECURITY PRINCIPLES AND PRACTICE". 2011, 2006 Pearson Education, Inc., publishing as Prentice Hall.
-\bibitem{6}Alfred J. Menezes, Paul C. van Oorschot, Scott A. Vanstone. "Chapter 9 - Hash Functions and Data Integrity" (PDF). Handbook of Applied Cryptography. p. 361.
-\bibitem{7}"Data Origin Authentication". Web Service Security. Microsoft Developer Network.
-\bibitem{11}"Cryptanalysis/Signals Analysis". Nsa.gov. 2009-01-15. Retrieved 2013-04-15.
-\bibitem{RFC2104} RFC 2104, H. Krawczyk, M. Bellare, R. Canetti, February 1997.
+\noindent [2] Jonathan, Katz; Yehuda, Lindell. "Introduction to Modern Cryptography". 2007. Jonathan Katz and Yehuda Lindell.\\
 
-\end{thebibliography}
+\noindent [3] Bellare, Mihir; Rogaway, Phillip (21 September 2005). "Introduction". Introduction to Modern Cryptography. p. 10.\\
+
+\noindent [4] Menezes, A. J.; van Oorschot, P. C.; Vanstone, S. A. Handbook of Applied Cryptography. ISBN 0-8493-8523-7. Archived from the original on 7 March 2005.\\
+
+\noindent [5] William, Stallings. "CRYPTOGRAPHY AND NETWORK SECURITY PRINCIPLES AND PRACTICE". 2011, 2006 Pearson Education, Inc., publishing as Prentice Hall.\\
+
+\noindent [6] Alfred J. Menezes, Paul C. van Oorschot, Scott A. Vanstone. "Chapter 9 - Hash Functions and Data Integrity" (PDF). Handbook of Applied Cryptography. p. 361.\\
+\noindent [7] "Data Origin Authentication". Web Service Security. Microsoft Developer Network.\\
+
+\noindent [8] "Cryptanalysis/Signals Analysis". Nsa.gov. 2009-01-15. Retrieved 2013-04-15.\\
+
+\noindent [9] RFC 2104, H. Krawczyk, M. Bellare, R. Canetti, February 1997.\\
+
 \end{document}
  
