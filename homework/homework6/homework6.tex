@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
+\renewcommand{\thesection}{Ex. \arabic{section} ---}
+\renewcommand{\mod}{{\rm\ mod\ }}
+\title{VE475 Homework 6}
+\author{Liu Yihao 515370910207}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Application of the DLP}
+\begin{enumerate}
+\item
+\begin{enumerate}[(a)]
+\item
+For Alice, she knows that $$\gamma\equiv\alpha^r\mod p$$
+If Bob replies $$b\equiv r\mod p-1{\rm\ or\ }b\equiv x+r\mod p-1$$
+She can get $$\alpha^{p-1}\equiv 1\mod p$$
+$$\alpha^r\equiv\alpha^b\equiv\gamma\mod p{\rm\ or\ }\alpha^r\equiv\alpha^{b-x}\equiv\gamma\mod p$$
+So after calculating $\alpha^b\mod p$ or $\alpha^{b-x}\mod p$ and compare it with $\gamma$, she can prove Bob's identity if he replies the correct $b$.
+\item 
+For Bob, he doesn't know $r$, but he can compute $b=\log_\alpha\gamma$ or $b=\log_\alpha\gamma+x$ so that $b\equiv r\mod p-1$. If he can't do so, it becomes a DLP problem which is very difficult to solve, so he can prove his identity.
+\end{enumerate}
+\item
+\begin{enumerate}[(a)]
+\item
+\item
+\end{enumerate}
+\item
+It is Digital Signature Protocol.
+\end{enumerate}
+
+\end{document}
