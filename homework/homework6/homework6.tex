@@ -40,4 +40,43 @@ For Bob, he doesn't know $r$, but he can compute $b=\log_\alpha\gamma$ or $b=\lo
 It is Digital Signature Protocol.
 \end{enumerate}
 
+\section{Pohlig-Hellman}
+First, let $g$ be a generator of the group, let $x=\log_gh$, let $n$ be the order of the group, obtain a prime factorization so that $$n=\prod_{i=1}^rp_i^{e_i}$$
+
+Then, for each $i\in\{1,\dots,r\}$, compute $g_i=g^{n/p_i^{e_i}}$, which has order $p_i^{e_i}$, and compute $h_i=h^{n/p_i^{e_i}}$. Then we can use the Pohlig-Hellman algorithm for prime-power order to compute $x_i\in\{0,\dots,p_i^{e_1}-1\}$, which is described as follow:
+\begin{enumerate}
+\item Let $x=\log_gh$ ($x=x_i$, $g=g_i$, $h=h_i$ from previous part), where $g=p^e$, and first initialize $x_0=0$.
+\item Set $\gamma=g^{p^{e-1}}$.
+\item For each $k\in\{0,\dots,e-1\}$, compute $h_k=(g^{-x_k}h)^{p^{e-1-k}}$, By construction, the order of this element must divide $p$, hence $h_k\in\langle\gamma\rangle$. Then compute $d_k$ such that $\gamma^{d_k}=h_k$ and set $x_{k+1}=x_k+p^kd_k$.
+\item Obtain $x=x_e$.
+\end{enumerate}
+
+After get all $x_i$, solve the simultaneous congruence $$x\equiv x_i \mod p_i^{e_i},i\in\{1,\dots,r\}$$
+
+according to Chinese reminder theorem to get $x=\log_gh$.\\
+
+As an example, we try to find $\log_3 3344$ in $G=U(Z/24389Z).$ Note that $24389=29^3$, so the order $n=28^3=2^6\cdot7^3$.
+$$\varphi(85)=2^6$$
+$$\varphi()=7^3$$
+
+And 3 is a generator of $G$, so we can get 
+\begin{align*}
+g_1\equiv 3^{7^3}\equiv 62 &\mod 85\\
+h_1\equiv 3344^{7^3}\equiv 24 &\mod 85\\
+g_2\equiv 3^{2^6}\equiv 225 &\mod 342\\
+h_2\equiv 3344^{2^6}\equiv 76 &\mod 342
+\end{align*}
+
+First, for $p=2$, $e=6$, $g=62$ and $h=24$, we should determine $x=\log_gh$ in $G=U(Z/85Z)$. We can get
+$$\gamma\equiv 62^{2^5} \equiv 1 \mod 85$$
+
+$$
+\begin{array}{ccc}
+h_0 \equiv (62^{0}\cdot 24)^{2^5} \equiv 1 \mod 85, & d_0=1, & x_1\equiv 1 \mod 85 \\
+\end{array}
+$$
+
+$$$$
+$$$$
+
 \end{document}
