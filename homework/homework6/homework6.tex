@@ -26,15 +26,15 @@
 For Alice, she knows that $$\gamma\equiv\alpha^r\mod p$$
 If Bob replies $$b\equiv r\mod p-1{\rm\ or\ }b\equiv x+r\mod p-1$$
 She can get $$\alpha^{p-1}\equiv 1\mod p$$
-$$\alpha^r\equiv\alpha^b\equiv\gamma\mod p{\rm\ or\ }\alpha^r\equiv\alpha^{b-x}\equiv\gamma\mod p$$
-So after calculating $\alpha^b\mod p$ or $\alpha^{b-x}\mod p$ and compare it with $\gamma$, she can prove Bob's identity if he replies the correct $b$.
+$$\alpha^b\equiv\alpha^r\equiv\gamma\mod p{\rm\ or\ }\alpha^b\equiv\alpha^{x+r}\equiv\gamma\beta\mod p$$
+So after calculating $\alpha^b\mod p$ and compare it with $\gamma$ or $\gamma\beta$, she can prove Bob's identity if he can calculate $x=\log_\alpha\beta$.
 \item 
-For Bob, he doesn't know $r$, but he can compute $b=\log_\alpha\gamma$ or $b=\log_\alpha\gamma+x$ so that $b\equiv r\mod p-1$. If he can't do so, it becomes a DLP problem which is very difficult to solve, so he can prove his identity.
+For Bob, if he doesn't know $x$, then he can't compute $b\equiv x+r\mod p-1$.If he want to know $x$, it becomes a DLP problem which is very difficult to solve, so he can prove his identity.
 \end{enumerate}
 \item
 \begin{enumerate}[(a)]
-\item
-\item
+\item 128 times.
+\item 192 times.
 \end{enumerate}
 \item
 It is Digital Signature Protocol.
@@ -59,25 +59,52 @@ As an example, we try to find $\log_3 3344$ in $G=U(Z/24389Z).$ Note that $24389
 
 And 3 is a generator of $G$, so we can get 
 \begin{align*}
-g_1 &\equiv 3^{7\cdot29^2}\equiv  \mod 24389\\
-h_1 &\equiv 3344^{7\cdot29^2}\equiv  \mod 24389\\
-g_2 &\equiv 3^{2^2\cdot29^2}\equiv  \mod 24389\\
-h_2 &\equiv 3344^{2^2\cdot29^2}\equiv  \mod 24389 \\
-g_3 &\equiv 3^{2^2\cdot7}\equiv  \mod 24389\\
-h_3 &\equiv 3344^{2^2\cdot7}\equiv  \mod 24389
+g_1 &\equiv 3^{7\cdot29^2}\equiv 10133 \mod 24389\\
+h_1 &\equiv 3344^{7\cdot29^2}\equiv 24388 \mod 24389\\
+g_2 &\equiv 3^{2^2\cdot29^2}\equiv 7302 \mod 24389\\
+h_2 &\equiv 3344^{2^2\cdot29^2}\equiv 4850 \mod 24389 \\
+g_3 &\equiv 3^{2^2\cdot7}\equiv 11369 \mod 24389\\
+h_3 &\equiv 3344^{2^2\cdot7}\equiv 23114 \mod 24389
 \end{align*}
 
-First, for $p=2$, $e=6$, $g=62$ and $h=24$, we should determine $x=\log_gh$ in $G=U(Z/85Z)$. We can get
-$$\gamma\equiv 62^{2^5} \equiv 1 \mod 85$$
-
+First, for $p=2$, $e=2$, $g=10133$ and $h=24388$, we should determine $x_a=\log_gh$. We can get
+$$\gamma\equiv 10133^{2} \equiv 24388 \equiv -1 \mod 24389$$
 $$
 \begin{array}{ccc}
-h_0 \equiv (62^{0}\cdot 24)^{2^5} \equiv 1 \mod 85, & d_0=1, & x_1\equiv 1 \mod 85 \\
+h_0 \equiv (10133^{0}\cdot -1)^{2} \equiv 1 \mod 24389, & d_0=0, & x_1\equiv 0 \mod 4 \\
+h_1 \equiv (10133^{0}\cdot -1)^{1} \equiv -1 \mod 24389, & d_1=1, & x_2\equiv 2 \mod 4 \\
 \end{array}
 $$
+$$x_a=2 \mod 4$$
 
-$$$$
-$$$$
+Second, for $p=7$, $e=1$, $g=7302$ and $h=4850$, we should determine $x_b=\log_gh$. We can get
+$$\gamma\equiv 7302^{1} \equiv 7302 \mod 24389$$
+$$
+\begin{array}{ccc}
+h_0 \equiv (7302^{0}\cdot 4850)^{1} \equiv 4850 \mod 24389, & d_0=2, & x_1\equiv 2 \mod 7 \\
+\end{array}
+$$
+$$x_b=2 \mod 7$$
+
+Third, for $p=29$, $e=2$, $g=11369$ and $h=23114$, we should determine $x_c=\log_gh$. We can get
+$$\gamma\equiv 11369^{29} \equiv 12616 \mod 24389$$
+$$
+\begin{array}{ccc}
+h_0 \equiv (11369^{0}\cdot 23114)^{29} \equiv 11775 \mod 24389, & d_0=28, & x_1\equiv 28 \mod 841 \\
+h_1 \equiv (11369^{-28}\cdot 23114)^{1} \equiv 3365 \mod 24389, & d_1=8, & x_2\equiv 260 \mod 841 \\
+\end{array}
+$$
+$$x_c=260 \mod 841$$
+
+According to Chinese remainder theorem, we can simply get 
+\begin{align*}
+x &\equiv 2 \mod 28 \\
+x &\equiv 260 \mod 841 \\
+841 \cdot 1 &\equiv 1 \mod 28 \\
+28 \cdot 811 &\equiv 1 \mod 841 
+\end{align*}
+$$x\equiv 841 \cdot 1 \cdot 2 + 28 \cdot 811 \cdot 260 \equiv 18762 \mod 23548 $$
+
 
 \section{Elgamal}
 \begin{enumerate}
@@ -117,17 +144,59 @@ $$r \equiv X^{18} \equiv X+1 \mod P(X)$$
 $$\beta^k \equiv (X+2)^{18} \equiv \mod P(X) $$
 
 Then we can map the message ``goodmorning'' into $F_{3^3}$ as
-% 6 14 14 3 12 14 17 13 8 13 6
-$$$$
+\input{ex3/2}
 
+which can be encrypted by the equation
+$$c \equiv \beta^k m \equiv (X+2)^{18} m \mod P(X) $$
 
+The result $r$ is
+\input{ex3/3}
 
+Mapping them back to letters, we get the ciphertext ``saapyadzuzs''.
+
+Then we can use $$m\equiv tr^{-x} \equiv t(X+1)^{-11} \mod P(X)$$
+
+The result $m$ is
+\input{ex3/2}
+
+So the plaintext is successfully decrypted.
 \end{enumerate}
 
 \section{Simple Questions}
+\begin{enumerate}
+\item
+\begin{enumerate}[(i)]
+\item Yes. We know $h(x)\equiv x^2 \mod pq$, and we can find $x$ by computing $\sqrt{h(x)}\mod p$ and $\sqrt{h(x)}\mod q$ and then use Chinese remainder theorem. However, $p,q$ are large primes, the factorization of $n$ is very difficult, so we can't efficiently find $x$.
+\item No. Given $x$, we can find $x'=-x$ so that $h(x)=h(x')$.
+\item No. For any $x$ and $x'$ so that $x'=-x$, we can find $h(x)=h(x')$.
+\end{enumerate}
+\item
+\begin{enumerate}[(i)]
+\item Efficiently computed for any input can be verified. Any length of message $m$ can be computed into an 160 bits length result efficiently through xor.
+\item Pre-image resistant is not verified. Given $y$, let $m=y$, we can get $h(m)=y$. 
+\item Second pre-image resistant is not verified. Given $m$, we can add 160 bits 0 after $m$ to form $m'$, so that $h(m)=h(m')$.
+\item Collision resistant is not verified. For any $m$ and $m'$ so that 160 bits 0 after $m$ are added to to form $m'$, we can find $h(m)=h(m')$.
+\end{enumerate}
+\end{enumerate}
 
+\section{Merkle-Damgård construction}
+\begin{enumerate}
+\item
+\begin{enumerate}[a)]
+\item
+Suppose the map $s$ is not injective, that is, $\exists x\neq x'$ so that $y=y'$. Than we can apply the following strategy to examine. Let $y_0=y$, if $y_{0,|y_0|-1}||y_{0,|y_0|}=01$, we can find $x_{|x|}=x'_{|x'|}=1$, and let $y_0=y_{0,1}||\cdots||y_{0,|y_0|-2}$. Otherwise, if $y_{0,|y_0|}=0$, we can find $x_{|x|}=x'_{|x'|}=0$, and let $y_0=y_{0,1}||\cdots||y_{0,|y_0|-1}$. Repeating the strategy until $|y_0|=11$, we can find all bits of $x$ and $x'$ are the same, so $x=x'$, which makes a contradiction. So map $s$ is injective.
+\item
+If $z$ is empty, according to a), we know there is no strings $x\neq x'$ and $z$ such that $s(x) = z||s(x')$.\\
+If $z$ is not empty, let $a=z||s(x')$, we can find a substring 11 in $a_1||a_2||\cdots||a_{|a|}$. However, we can only find 11 in $s(x)_0||s(x)_1$, which makes a contradiction.\\
+So we can conclude that there is no strings $x\neq x'$ and $z$ such that $s(x) = z||s(x')$.
+\end{enumerate}
+\item
+From the two previous conditions, we know collisions can't be found through changing bits of input or adding paddings, which means the map $s$ is collision resistant.
+\item
 
+\end{enumerate}
 
-
+\section{Programming}
+In the ex6 folder, with a README file inside it.
 
 \end{document}

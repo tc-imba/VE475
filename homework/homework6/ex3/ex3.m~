@@ -20,9 +20,7 @@ end
 fprintf(fid, '\\end{array}$$\n');
 fclose(fid);
 
-m='goodmorning';
-m=double(m)-double('a')+1;
-c=zeros(1,length(m));
+m=[6 14 14 3 12 14 17 13 8 13 6];
 
 fid=fopen('2.tex', 'w');
 fprintf(fid, '$$');
@@ -49,12 +47,9 @@ for i=1:length(m)
         fprintf(fid, ',');
     end
     for j=1:26
-        if strcmp(F(j), f)
-            c(i)=j;
-            break;
-        end
+        if F(j)
     end
 end
+
 fprintf(fid, '$$\n');
 fclose(fid);
-char(c+double('a')-1)
