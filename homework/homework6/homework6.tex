@@ -193,6 +193,24 @@ So we can conclude that there is no strings $x\neq x'$ and $z$ such that $s(x) =
 \item
 From the two previous conditions, we know collisions can't be found through changing bits of input or adding paddings, which means the map $s$ is collision resistant.
 \item
+Assuming we have a collision on $h$, i.e. $x\neq x'$ and $h(x)=h(x')$, we will prove that a collision on the compression function $g$ can be efficiently found.
+
+Since $x\neq x'$ , they are padded with two different values $d$ and $d'$, respectively. Similarly $k + 1$ and $k' + 1$ denote the number of blocks for $x$ and $x'$ .
+
+Since $t-1=0$, we don't need to consider $x\not\equiv x'\mod(t-1)$ any more, then we can only consider $k=k'$ and $k\neq k'$.
+
+First, consider $k=k'$, this implies $y_{k+1}=y_{k'+1}$, and we have $$g(z_{k-1}||y_k)=z_{k}=h(x)=h(x')=z_k=g(z_{k-1}'||y_k')$$
+
+If $z_{k-1}\neq z_{k-1}'$, a collision is found. Otherwise we repeat the
+process and get $$g(z_{k-2}||y_{k-1})=z_{k-1}=h(x)=h(x')=z_{k-1}=g(z_{k-2}'||y_{k-1}')$$
+
+Then either we have found a collision or we continue backward until one is obtained. If none is found then we get $z_1=z_1',\dots,z_k=z_k'$, which makes a contradiction.
+
+Second, consider $k\neq k'$  Without loss of generality assume $k'>k$ and proceed as in the first case. If no collision is found before $k = 1$ then we have $$g(0^m||y_1)=z_1=z_{k'-k+1}'=g(z_{k'-k}'||1||y_{k'-k+1}')$$
+
+By construction the $m$ bit on the left is 0 while on the right it is 1. Hence we have found a collision.
+
+All the cases being covered this completes the proof.
 
 \end{enumerate}
 
