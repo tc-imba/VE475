@@ -47,9 +47,15 @@ Adaptive chosen ciphertext attacks can be applied if a ciphertext can be modifie
 \section{Simple questions}
 \begin{enumerate}
 \item
-A good cryptographic hash function is a function $h$ that verifies the following properties:
-
+Since $p$ is a prime and $p\nmid \alpha$, we can find $\gcd(p,\alpha)=1$, so $\alpha^{p-1}\equiv 1\mod p$. First, $h(x)$ isn't second pre-image resistant. Given $x$, we can simply find $x'=x+p-1$ so that $h(x)=h(x')$. Second, $h(x)$ isn't collision resistant. For any $x$, we can simply find $x'=x+p-1$ so that $h(x)=h(x')$. So it is not a good cryptographic hash function.
 \item
+\begin{align*}
+\lfloor2^{30}\sqrt{2}\rfloor&=\lfloor40000000\cdot\sqrt{2}\rfloor=5A827999 \\
+\lfloor2^{30}\sqrt{3}\rfloor&=\lfloor40000000\cdot\sqrt{3}\rfloor=6ED9EBA1 \\
+\lfloor2^{30}\sqrt{5}\rfloor&=\lfloor40000000\cdot\sqrt{5}\rfloor=8F1BBCDC \\
+\lfloor2^{30}\sqrt{10}\rfloor&=\lfloor40000000\cdot\sqrt{10}\rfloor=CA62C1D6
+\end{align*}
+I found the results identical to $K_0||\cdots||K_{19}$, $K_{20}||\cdots||K_{39}$, $K_{40}||\cdots||K_{59}$ and $K_{60}||\cdots||K_{79}$.
 \end{enumerate}
 
 
@@ -116,12 +122,15 @@ $$P=1-\prod_{j=1}^{39}\left(1-\frac{j}{1000}\right)\approx0.5464$$
 \item
 $$P=39\left(\frac{1}{1000}\right)\left(\frac{999}{1000}\right)^{38}\approx0.0375$$
 \item
+
 \end{enumerate}
 
 \section{Faster multiple modular exponentiation}
 \begin{enumerate}
 \item
+The complexity of computing $\alpha^a\mod n$ is $O(\log a)$, the complexity of computing $\beta^b\mod n$ is $O(\log b)$, so the total time complexity is $O(\log ab)$.
 \item
+
 \item
 \item
 \end{enumerate}
