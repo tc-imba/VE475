@@ -1,6 +1,13 @@
 ## Introduction
 
-This cipher is based on AES (which we learnt on the class). It is known that AES uses blocks of 128-bits, that is, an array of uint8_t, size of 16, in this implementation.
+This cipher is based on 32-bit RC5.
+
+From Wikipedia, the free encyclopedia
+
+> In cryptography, RC5 is a symmetric-key block cipher notable for its simplicity. Designed by Ronald Rivest in 1994, RC stands for "Rivest Cipher", or alternatively, "Ron's Code" (compare RC2 and RC4). The Advanced Encryption Standard (AES) candidate RC6 was based on RC5.
+
+Some of the details of the algorithm can be found on [wiki - RC5](https://en.wikipedia.org/wiki/RC5)
+
 
 ## Usage
 ```

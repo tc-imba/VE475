@@ -8,11 +8,7 @@
 #include <string>
 
 #include "byte.h"
-
-extern "C"
-{
-#include "aes.h"
-}
+#include "rc5.h"
 
 
 using namespace std;
@@ -20,11 +16,11 @@ using namespace std;
 uint8_t *getKeyBytes(const string &key)
 {
     auto k = byte_encode(key);
-    auto k_ = new uint8_t[8];
-    for (int i = 0; i < 8; i++)
+    auto k_ = new uint8_t[16];
+    for (int i = 0; i < 16; i++)
     {
-        if (i < k.size()) k_[i] = k[i];
-        else k_[i] = 0;
+        if (i < k.size())k_[i] = k[i];
+        k_[i] = 0;
     }
     return k_;
 }
@@ -53,22 +49,23 @@ string generate()
 string encrypt(const string &message, const string &key)
 {
     auto m = byte_encode(message);
-    auto k = getKeyBytes(key);
-    uint8_t trim = (m.size() + 1) % 16;
-    if (trim > 0) trim = 16 - trim;
+    auto k_ = getKeyBytes(key);
+    auto k = rc5_generate_key(k_, 16);
+    uint8_t trim = (m.size() + 1) % 8;
+    if (trim > 0) trim = 8 - trim;
     m.insert(m.begin(), trim);
     for (int i = 0; i < trim; i++) m.push_back(0);
     vector<uint8_t> result(m.size());
-    for (int i = 0; i < m.size(); i += 16)
+    for (int i = 0; i < m.size(); i += 8)
     {
-        uint8_t m_[16] = {};
-        for (int j = 0; j < 16; j++)
+        uint8_t m_[8] = {};
+        for (int j = 0; j < 8; j++)
         {
             m_[j] = m[i + j];
-            if (i > 0)m_[j] ^= result[i + j - 16];
+            if (i > 0)m_[j] ^= result[i + j - 8];
         }
-        auto c = aes_encode(m_, k);
-        for (int j = 0; j < 16; j++)
+        auto c = rc5_encode(m_, k);
+        for (int j = 0; j < 8; j++)
         {
             result[i + j] = c[j];
         }
@@ -82,20 +79,21 @@ string decrypt(const string &ciphertext, const string &key)
 {
     string str;
     auto c = byte_encode_double(ciphertext);
-    auto k = getKeyBytes(key);
-    uint8_t trim = c.size() % 16;
-    if (trim > 0)for (int i = 0; i < 16 - trim; i++)c.push_back(0);
+    auto k_ = getKeyBytes(key);
+    auto k = rc5_generate_key(k_, 16);
+    uint8_t trim = c.size() % 8;
+    if (trim > 0)for (int i = 0; i < 8 - trim; i++)c.push_back(0);
     vector<uint8_t> result(c.size());
-    for (int i = c.size() - 16; i >= 0; i -= 16)
+    for (int i = c.size() - 8; i >= 0; i -= 8)
     {
-        uint8_t c_[16] = {};
-        for (int j = 0; j < 16; j++)
+        uint8_t c_[8] = {};
+        for (int j = 0; j < 8; j++)
         {
             c_[j] = c[i + j];
-            if (i < c.size() - 16)result[i + j + 16] ^= c_[j];
+            if (i < c.size() - 8)result[i + j + 8] ^= c_[j];
         }
-        auto m = aes_decode(c_, k);
-        for (int j = 0; j < 16; j++)
+        auto m = rc5_decode(c_, k);
+        for (int j = 0; j < 8; j++)
         {
             result[i + j] = m[j];
         }
@@ -113,6 +111,7 @@ int main(int argc, char *argv[])
 {
     //cout << encrypt("fhruisgboikufgdsbikgsbkjfdg", "dsfhuifgdhbksfgdbnkjg") << endl;
     //cout << decrypt("3MjR1TpIFN5bdpBCY6,sIkTwNhrgrAapmtQOIBAP.EiSs8oz4ewnPhMDIbsHmsxc", "dsfhuifgdhbksfgdbnkjg") << endl;
+
 
     if (argc <= 1) help();
     else if (strcmp(argv[1], "--generate") == 0) cout << generate() << endl;
