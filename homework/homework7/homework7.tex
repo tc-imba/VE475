@@ -8,6 +8,9 @@
 \usepackage{caption}
 \usepackage{indentfirst}
 \usepackage{multirow}
+\usepackage{algorithm}  
+\usepackage{algorithmicx}  
+\usepackage{algpseudocode}
 \geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
 \renewcommand{\thesection}{Ex. \arabic{section} ---}
 \renewcommand{\mod}{{\rm\ mod\ }}
@@ -122,7 +125,7 @@ $$P=1-\prod_{j=1}^{39}\left(1-\frac{j}{1000}\right)\approx0.5464$$
 \item
 $$P=40\left(\frac{1}{1000}\right)\left(\frac{999}{1000}\right)^{39}\approx0.0385$$
 \item
-We can find that although there is possibility of the existence of collision in a random set, it's very difficult to find a message having the same hash as the origin message in that. So if Alice use a collision resistant hash function (which can be seen as a function that generates random result when changing the input even a little) to validate the message, she can overcome the problem.
+According to part 1, it's possible to find a collision of a hash function in a set. However, according to part 2, the very difficult to find a collision of a certain message. So Alice can overcome the problem by changing the message a bit so that Eve can't find a collision for the new message.
 
 \end{enumerate}
 
@@ -130,10 +133,35 @@ We can find that although there is possibility of the existence of collision in 
 \begin{enumerate}
 \item
 The complexity of computing $\alpha^a\mod n$ is $O(\log a)$, the complexity of computing $\beta^b\mod n$ is $O(\log b)$, so the total time complexity is $O(\log ab)$.
-\item
+\item \ 
+\begin{algorithm}  
+\begin{algorithmic}
+\Function {FastModularExponentiation}{$\alpha$, $a$, $\beta$, $b$, $n$}
+	\State $k_a \gets$ \Call{SizeInBase}{$a$, 2}
+	\State $k_b \gets$ \Call{SizeInBase}{$b$, 2}
+	\State $k \gets$ \Call{Max}{$k_a$, $k_b$}
+	\State $result \gets 1$
+	\For{$i=k-1$ \textbf{downto} 0}  
+    		\State $result \gets result \cdot result$ \textbf{mod} $n$
+    		\If {\Call{Bit}{$a$, i} = 1}  
+    			\State $result \gets result \cdot \alpha$ \textbf{mod} $n$
+    		\EndIf
+    		\If {\Call{Bit}{$b$, i} = 1}  
+    			\State $result \gets result \cdot \beta$ \textbf{mod} $n$
+    		\EndIf 
+    \EndFor
+    \State \Return{$result$}  
+\EndFunction  
+\end{algorithmic}  
+\end{algorithm}  
 
 \item
+$3l$ squaring and multiplications are necessary to compute $\alpha^a\beta^b\mod n$.
+
+
 \item
+In the ex4 folder, with a README file inside it.
+
 \end{enumerate}
 
 \end{document}
