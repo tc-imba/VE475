@@ -68,6 +68,7 @@ $$\alpha^i \equiv \alpha^{le_1+xe_2} \mod p$$
 $$\alpha^j \equiv \alpha^{ke_1+e_2} \mod p$$
 $$i \equiv le_1+xe_2 \mod p-1$$
 $$j \equiv ke_1+e_2 \mod p-1$$
+Since $s\not\equiv m^x \mod p$, we can get $l\not\equiv kx \mod p-1$, so the unique $(l-kx)^{-1}$ can be found.
 $$e_1 \equiv (i-xj)(l-kx)^{-1} \mod p-1$$
 $$e_2 \equiv (ki-lj)(kx-l)^{-1} \mod p-1$$
 So it has a unique solution.
@@ -98,9 +99,19 @@ ensures Alice that Bob is not trying to disavow a valid signature.
 \item
 \begin{enumerate}[(a)]
 \item
+Since $$t_1 \not\equiv r_1^{x^{-1}} \equiv m^{e_1}\alpha^{e_2} \mod p$$
+Bob must be cheating. Suppose $$\left(t_1\alpha^{-e_2}\right)^{f_1} \equiv \left(t_2\alpha^{-f_2}\right)^{e_1} \mod p$$
+We can get
+$$t_2\equiv (t_1^{1/e_1}\alpha^{-e_2/e_1})^{f_1}\alpha^{f_2} \mod p$$
+$$t_2\not\equiv m^{f_1}\alpha^{f_2} \mod p$$
+So $$t_1^{1/e_1}\alpha^{-e_2/e_1} \not\equiv m \mod p$$
+According to question 1, $t_1^{1/e_1}\alpha^{-e_2/e_1}$ will be accepted with probability less than $1/q$, which means $$\left(t_1\alpha^{-e_2}\right)^{f_1} \not\equiv \left(t_2\alpha^{-f_2}\right)^{e_1} \mod p$$
+with probability $1-1/q$.
 
 \item
+Yes, it requires Bob to follow the disavowal protocol.
 \item
+When $q$ is large enough, $1/q$ is close to zero, which means Bob can convince Alice that a valid signature is a forgery.
 \end{enumerate}
 
 \end{enumerate}
