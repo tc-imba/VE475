@@ -35,13 +35,112 @@ When Bob wants to verify the message sent by Alice, he also hashes the message i
 \item
 Benefits:
 \begin{enumerate}[(a)]
+\item Lamport signatures with large hash functions would still be secure in quantum computers.
+\item Lamport signatures can be built from any cryptographically secure one-way function.
+\end{enumerate}
+Drawbacks:
+\begin{enumerate}[(a)]
 \item The security of Lamport signatures is based on security of the one way hash function, the length of its output and the quality of the input.
+\item The private key can only be used once.
+\end{enumerate}
 
+\item
+When the key is used the first time, we can determine half of the private key. When the same key is used twice, suppose in the hash sums of the two messages, half of the bits are different (in theorem). Then we can determine another quarter of the private key. Each time the same key is used, the unknown part of the private key will decrease a half (in theorem), so the security also decreases a half.
 
-\item 
+\item
+A Merkle tree is a tree in which every non-leaf node is labeled with the hash of the labels or values (in case of leaves) of its child nodes. Merkle trees allow efficient and secure verification of the contents of large data structures. 
+
+Merkle tree can be used as the data structure of the public key of Lamport signature, so that different messages can be signed with the same public key and doesn't decrease security. We can publish the top hash of the hash tree instead of generating keys every time. This increases the size of the resulting signature, since parts of the hash tree have to be included in the signature, but it makes it possible to publish a single hash that then can be used to verify any given number of future signatures, which is much more efficient.
+
+\end{enumerate}
+
+\section{Chaum-van Antwerpen signatures}
+\begin{enumerate}
+\item
+\begin{enumerate}[(a)]
+\item
+$$r \equiv s^{e_1}\beta^{e_2} \mod p$$
+For each value $r$, first we randomly choose $e_1$ so that there are $q$ different choices. Then
+$$\beta^{e_2} \equiv \alpha^{xe_2} \equiv rs^{-e_1} \mod p$$
+Since $\alpha$ is a generator of $F_q^*$ and $F_q^*$ is a subgroup of order $F_p^*$, at least one value $e_2$ can be determined in the formula above. So there are at least $q$ ordered pairs $\langle e_1,e_2 \rangle$ which can be considered.
+\item
+$$\alpha^i \equiv \alpha^{le_1+xe_2} \mod p$$
+$$\alpha^j \equiv \alpha^{ke_1+e_2} \mod p$$
+$$i \equiv le_1+xe_2 \mod p-1$$
+$$j \equiv ke_1+e_2 \mod p-1$$
+$$e_1 \equiv (i-xj)(l-kx)^{-1} \mod p-1$$
+$$e_2 \equiv (ki-lj)(kx-l)^{-1} \mod p-1$$
+So it has a unique solution.
+\item
+Since there are at least $q$ pairs of $\langle e_1,e_2 \rangle$, but only one of them satisfy $s\equiv m^x\mod p$, the probability of wrong acceptance is less than $1/q$.
+\end{enumerate}
+
+\item
+\begin{enumerate}[(a)]
+\item
+$$t_1 \equiv r_1^{x^{-1}} \equiv s^{e_1x^{-1}}\alpha^{e_2} \mod p$$
+$$\left(t_1\alpha^{-e_2}\right)^{f_1} \equiv s^{e_1f_1x^{-1}} \mod p$$
+\item
+$$t_2 \equiv r_2^{x^{-1}} \equiv s^{f_1x^{-1}}\alpha^{f_2} \mod p$$
+$$\left(t_2\alpha^{-f_2}\right)^{e_1} \equiv s^{e_1f_1x^{-1}} \mod p$$
+So we can prove that $$\left(t_1\alpha^{-e_2}\right)^{f_1} \equiv \left(t_2\alpha^{-f_2}\right)^{e_1} \mod p$$
+If $s\not\equiv m^x \mod p$, we know
+$$t_1\equiv r^{x^{-1}} \equiv s^{e_1x^{-1}}\beta^{e_2x^{-1}} \mod p$$
+$$t_1\not\equiv m^{e_1}\alpha^{e_2} \mod p$$
+Similarly,
+$$t_2\not\equiv m^{f_1}\alpha^{f_2} \mod p$$
+If the signature is invalid then the verification fails. The question is then to know if Bob played a fair game, following the protocol when constructing $t_1$ and $t_2$.
+The last step, testing the congruence
+$$\left(t_1\alpha^{-e_2}\right)^{f_1} \equiv \left(t_2\alpha^{-f_2}\right)^{e_1} \mod p$$
+ensures Alice that Bob is not trying to disavow a valid signature.
+\end{enumerate}
+
+\item
+\begin{enumerate}[(a)]
+\item
+
+\item
+\item
 \end{enumerate}
 
 \end{enumerate}
+
+\section{Simple questions}
+\begin{enumerate}
+\item
+\begin{enumerate}[(a)]
+\item
+$$\alpha^k \equiv 170^{49} \equiv 1776 \mod p$$
+$$r \equiv 1776 \equiv 59 \mod q$$
+$$k^{-1} \equiv 49^{-1} \equiv 33 \mod q$$
+$$s \equiv k^{-1}(m+xr) \equiv 33(52+75\cdot59)\equiv 79 \mod q$$
+Then $\langle r,s\rangle=\langle 59,79\rangle$ is the signature of $m=52$.
+\item
+$$s^{-1} \equiv 79^{-1} \equiv 78 \mod q$$
+$$s^{-1}m \equiv 78\cdot52 \equiv 16 \mod q$$
+$$s^{-1}r \equiv 79\cdot59 \equiv 57 \mod q$$
+$$\alpha^{16}\beta^{57}=170^{16}\cdot 4567^{57} \equiv 1776 \mod p$$
+$$v \equiv 1776 \equiv 59 \mod q$$
+Since $v=r$, the signature is verified.
+\end{enumerate}
+
+\item
+$$\beta^r r^{s_1} \equiv \alpha^{m_1} \mod p$$
+$$\beta^r r^{s_2} \equiv \alpha^{m_2} \mod p$$
+$$\alpha^{m_1-m_2} \equiv \alpha^{k(s_1-s_2)} \mod p$$
+$$m_1-m_2 \equiv k(s_1-s_2) \mod p-1$$
+$$8990-31415 \equiv k(31396-20481) \mod p-1$$
+$$-22425 \equiv 10915k \mod 31846$$
+$$-22425 \cdot 6115 \equiv 1 \mod 31846$$
+$$10915 \cdot 6115 \cdot k \equiv 27855k \equiv 1 \mod 31846$$
+$$k \equiv 1165 \mod 31846$$
+$$s_1^{-1} \equiv k^{-1}(m_1-xr) \mod p-1$$
+$$30926 \equiv 27855(8990-23972x) \mod 31846$$
+$$19574 \equiv 6868x \mod 31846$$
+$$1 \equiv 3018\cdot6868\cdot x \mod 31846$$
+$$x \equiv 27365 \mod 31846$$
+\end{enumerate}
+
 
 
 \end{document}
