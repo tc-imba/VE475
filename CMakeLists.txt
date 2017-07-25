@@ -10,3 +10,5 @@ add_subdirectory(homework/homework7)
 
 add_subdirectory(challenges/c2/cipher1)
 add_subdirectory(challenges/c2/cipher2)
+
+add_subdirectory(project/project2)
