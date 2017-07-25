@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <memory.h>
 
 typedef enum
 {
@@ -21,6 +22,25 @@ typedef enum
 } sha3_bits;
 
 static const size_t SHA3_WIDTH[] = {1, 2, 4, 8, 16, 32, 64};
+
+static const uint8_t SHA3_RC[0xFF] = {
+        1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+        1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1,
+        1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1,
+        0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,
+        0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1,
+        0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1,
+        1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1,
+        1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1,
+        0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0,
+        1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1,
+        0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1,
+        0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0,
+        1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
+        1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0
+};
 
 static uint8_t sha3_temp[5][64] = {};
 
@@ -38,6 +58,12 @@ void sha3_convert_state_array_to_string(sha3_state_array A, sha3_string S, sha3_
 void sha3_step_theta(sha3_state_array A, sha3_bits b);
 
 void sha3_step_rho(sha3_state_array A, sha3_bits b);
+
+void sha3_step_pi(sha3_state_array A, sha3_bits b);
+
+void sha3_step_chi(sha3_state_array A, sha3_bits b);
+
+
 
 
 #endif //VE475_SHA3_H

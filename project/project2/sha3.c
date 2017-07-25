@@ -87,15 +87,96 @@ void sha3_step_theta(sha3_state_array A, sha3_bits b)
 void sha3_step_rho(sha3_state_array A, sha3_bits b)
 {
     uint8_t x = 1, y = 0;
+    uint8_t *B = sha3_temp[0];
     for (int t = 0; t < 24; t++)
     {
-        uint8_t temp = (-(t + 1) * (t + 2) / 2) % SHA3_WIDTH[b] + SHA3_WIDTH[b];
-        for (int i=)
+        uint8_t temp = ((-(t + 1) * (t + 2) / 2) % SHA3_WIDTH[b] + SHA3_WIDTH[b]) % SHA3_WIDTH[b];
+        memcpy(B, A[x][y] + SHA3_WIDTH[b] - temp, sizeof(uint8_t) * temp);
+        memcpy(A[x][y] + temp, A[x][y], sizeof(uint8_t) * (SHA3_WIDTH[b] - temp));
+        memcpy(A[x][y], B, sizeof(uint8_t) * temp);
         temp = (2 * x + 3 * y) % 5;
         x = y;
         y = temp;
-        printf("%d\t%d\n", x, y);
+        //printf("%d\t%d\n", x, y);
     }
+}
+
+void sha3_step_pi(sha3_state_array A, sha3_bits b)
+{
+    for (int k = 0; k < SHA3_WIDTH[b]; k++)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                sha3_temp[i][j] = A[(i + 3 * j) % 5][i][k];
+            }
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                A[i][j][k] = sha3_temp[i][j];
+            }
+        }
+    }
+}
+
+void sha3_step_chi(sha3_state_array A, sha3_bits b)
+{
+    for (int k = 0; k < SHA3_WIDTH[b]; k++)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                sha3_temp[i][j] = A[i][j][k] ^ ((A[(i + 1) % 5][j][k] ^ (uint8_t) 1) & A[(i + 2) % 5][j][k]);
+            }
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                A[i][j][k] = sha3_temp[i][j];
+            }
+        }
+    }
+}
+
+void sha3_step_iota(sha3_state_array A, sha3_bits b, size_t ir)
+{
+    for (int j = 0; j < b; j++)
+    {
+        A[0][0][SHA3_WIDTH[j] - 1] ^= SHA3_RC[(j + 7 * ir) % 0xFF];
+    }
+}
+
+void sha3_rnd(sha3_state_array A, sha3_bits b, size_t ir)
+{
+    sha3_step_theta(A, b);
+    sha3_step_rho(A, b);
+    sha3_step_pi(A, b);
+    sha3_step_chi(A, b);
+    sha3_step_iota(A, b, ir);
+}
+
+void sha3_keccak_p(sha3_string S, sha3_bits b, size_t nr)
+{
+    sha3_state_array A;
+    sha3_init_state_array(&A, SHA3_BITS_1600);
+
+    for (size_t i = 1; i <= nr; i++)
+    {
+        sha3_rnd(A, b, 12 + 2 * b - i);
+    }
+
+    sha3_destroy_state_array(A);
+
+}
+
+void sha3_keccak_f(sha3_string S, sha3_bits b)
+{
+    sha3_keccak_p(S, b, 12 + 2 * b);
 }
 
 
