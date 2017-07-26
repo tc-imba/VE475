@@ -63,7 +63,13 @@ void sha3_step_pi(sha3_state_array A, sha3_bits b);
 
 void sha3_step_chi(sha3_state_array A, sha3_bits b);
 
+void sha3_step_iota(sha3_state_array A, sha3_bits b, size_t ir);
 
+void sha3_rnd(sha3_state_array A, sha3_bits b, size_t ir);
+
+void sha3_keccak_p(sha3_state_array A, sha3_bits b, size_t nr);
+
+void sha3_keccak_f(sha3_state_array A, sha3_bits b);
 
 
 #endif //VE475_SHA3_H
