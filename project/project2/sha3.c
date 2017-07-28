@@ -30,7 +30,7 @@ void sha3_destroy_state_array(sha3_state_array A)
     free(A);
 }
 
-void sha3_convert_string_to_state_array(sha3_string S, sha3_state_array A, sha3_bits b)
+void sha3_convert_string_to_state_array(sha3_string S, sha3_state_array A, sha3_bits b, size_t r)
 {
     for (int i = 0; i < 5; i++)
     {
@@ -38,7 +38,8 @@ void sha3_convert_string_to_state_array(sha3_string S, sha3_state_array A, sha3_
         {
             for (int k = 0; k < SHA3_WIDTH[b]; k++)
             {
-                A[i][j][k] = S[SHA3_WIDTH[b] * (5 * j + i) + k];
+                size_t index = SHA3_WIDTH[b] * (5 * j + i) + k;
+                A[i][j][k] = index < r ? S[index] : (uint8_t) 0;
             }
         }
     }
@@ -173,21 +174,43 @@ inline void sha3_keccak_f(sha3_state_array A, sha3_bits b)
     sha3_keccak_p(A, b, b * 2 + 12);
 }
 
-void sha3_pad_10x1()
-{
 
-}
-
-void sha3_sponge(sha3_string S, sha3_bits b)
+void sha3_sponge(sha3_input N, size_t N_len, size_t d, sha3_bits b, size_t r)
 {
+    // Padding
+    size_t m = N_len % r;
+    if (m <= 2)m += r;
+    size_t P_len = N_len + m;
+    sha3_input P = malloc(sizeof(uint8_t) * P_len);
+    memcpy(P, N, sizeof(uint8_t) * N_len);
+    memset(P + N_len + 1, 0, sizeof(uint8_t) * (m - 2));
+    P[N_len] = P[P_len - 1] = 1;
+    size_t n = P_len / r;
+
+    //
+    size_t c = SHA3_WIDTH[b] * 25 - r;
+    sha3_string S = malloc(sizeof(uint8_t) * SHA3_WIDTH[b]);
+
     sha3_state_array A;
+    sha3_init_state_array(&A, b);
+
+    for (int i = 0; i < P_len; i += r)
+    {
+
+        sha3_convert_string_to_state_array(P + i, A, b, r);
+
+    }
+
+
+
+    /*sha3_state_array A;
     sha3_init_state_array(&A, SHA3_BITS_1600);
     sha3_convert_string_to_state_array(S, A, b);
 
     sha3_keccak_f(A, b);
 
     sha3_convert_state_array_to_string(A, S, b);
-    sha3_destroy_state_array(A);
+    sha3_destroy_state_array(A);*/
 }
 
 
