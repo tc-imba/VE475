@@ -123,7 +123,6 @@ inline void sha3_step_rho(sha3_state_array A, sha3_bits b)
         temp = (2 * x + 3 * y) % 5;
         x = y;
         y = temp;
-        //printf("%d\t%d\n", x, y);
     }
 }
 
@@ -148,40 +147,19 @@ inline void sha3_step_pi(sha3_state_array A, sha3_bits b)
     }
 }
 
-#define SHA3_CHI_1(i, j, k) sha3_temp[i][j] = A[i][j][k] ^ ((A[(i + 1) % 5][j][k] ^ (uint8_t) 1) & A[(i + 2) % 5][j][k]);
-#define SHA3_CHI_4(i, j, k) A[i][j][k] = sha3_temp[i][j];
-#define SHA3_CHI_2(i, k, fn) \
-    fn(i,0,k) \
-    fn(i,1,k) \
-    fn(i,2,k) \
-    fn(i,3,k) \
-    fn(i,4,k)
-#define SHA3_CHI_3(k, fn) \
-    SHA3_CHI_2(0,k,fn) \
-    SHA3_CHI_2(1,k,fn) \
-    SHA3_CHI_2(2,k,fn) \
-    SHA3_CHI_2(3,k,fn) \
-    SHA3_CHI_2(4,k,fn)
-
-
 inline void sha3_step_chi(sha3_state_array A, sha3_bits b)
 {
     for (int k = 0; k < SHA3_WIDTH[b]; k++)
     {
-        /*for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 5; j++)
         {
-            for (int j = 0; j < 5; j++)
+            for (int i = 0; i < 5; i++)
             {
-                sha3_temp[i][j] = A[i][j][k] ^ ((A[(i + 1) % 5][j][k] ^ (uint8_t) 1) & A[(i + 2) % 5][j][k]);
+                sha3_temp[0][i] = A[i][j][k] ^ ((A[(i + 1) % 5][j][k] ^ (uint8_t) 1) & A[(i + 2) % 5][j][k]);
             }
-        }*/
-        SHA3_CHI_3(k, SHA3_CHI_1)
-        //SHA3_CHI_3(k, SHA3_CHI_4)
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 5; j++)
+            for (int i = 0; i < 5; i++)
             {
-                A[i][j][k] = sha3_temp[i][j];
+                A[i][j][k] = sha3_temp[0][i];
             }
         }
     }
