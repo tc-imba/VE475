@@ -59,6 +59,31 @@ void sha3_convert_state_array_to_string(sha3_state_array A, sha3_string S, sha3_
     }
 }
 
+void sha3_state_array_print(sha3_state_array A, sha3_bits b)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int k = 0; k < SHA3_WIDTH[b]; k++)
+            {
+                printf("%d\t", A[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+    printf("\n");
+}
+
+void sha3_string_print(sha3_string S, size_t length)
+{
+    for (int i = 0; i < length; i += 4)
+    {
+        printf("%X", S[i] * 8 + S[i + 1] * 4 + S[i + 2] * 2 + S[i + 3]);
+    }
+    printf("\n");
+}
+
 inline void sha3_step_theta(sha3_state_array A, sha3_bits b)
 {
     for (int i = 0; i < 5; i++)
@@ -123,17 +148,35 @@ inline void sha3_step_pi(sha3_state_array A, sha3_bits b)
     }
 }
 
+#define SHA3_CHI_1(i, j, k) sha3_temp[i][j] = A[i][j][k] ^ ((A[(i + 1) % 5][j][k] ^ (uint8_t) 1) & A[(i + 2) % 5][j][k]);
+#define SHA3_CHI_4(i, j, k) A[i][j][k] = sha3_temp[i][j];
+#define SHA3_CHI_2(i, k, fn) \
+    fn(i,0,k) \
+    fn(i,1,k) \
+    fn(i,2,k) \
+    fn(i,3,k) \
+    fn(i,4,k)
+#define SHA3_CHI_3(k, fn) \
+    SHA3_CHI_2(0,k,fn) \
+    SHA3_CHI_2(1,k,fn) \
+    SHA3_CHI_2(2,k,fn) \
+    SHA3_CHI_2(3,k,fn) \
+    SHA3_CHI_2(4,k,fn)
+
+
 inline void sha3_step_chi(sha3_state_array A, sha3_bits b)
 {
     for (int k = 0; k < SHA3_WIDTH[b]; k++)
     {
-        for (int i = 0; i < 5; i++)
+        /*for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 5; j++)
             {
                 sha3_temp[i][j] = A[i][j][k] ^ ((A[(i + 1) % 5][j][k] ^ (uint8_t) 1) & A[(i + 2) % 5][j][k]);
             }
-        }
+        }*/
+        SHA3_CHI_3(k, SHA3_CHI_1)
+        //SHA3_CHI_3(k, SHA3_CHI_4)
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 5; j++)
@@ -174,11 +217,29 @@ inline void sha3_keccak_f(sha3_state_array A, sha3_bits b)
     sha3_keccak_p(A, b, b * 2 + 12);
 }
 
+void sha3_state_array_op(sha3_state_array origin, sha3_state_array other, sha3_bits b, uint8_t (*fn)(uint8_t, uint8_t))
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int k = 0; k < SHA3_WIDTH[b]; k++)
+            {
+                origin[i][j][k] = fn(origin[i][j][k], other[i][j][k]);
+            }
+        }
+    }
+}
 
-void sha3_sponge(sha3_input N, size_t N_len, size_t d, sha3_bits b, size_t r)
+inline uint8_t sha3_xor(uint8_t a, uint8_t b)
+{
+    return a ^ b;
+}
+
+sha3_string sha3_sponge(sha3_input N, size_t N_len, size_t d, sha3_bits b, size_t r)
 {
     // Padding
-    size_t m = N_len % r;
+    size_t m = r - N_len % r;
     if (m <= 2)m += r;
     size_t P_len = N_len + m;
     sha3_input P = malloc(sizeof(uint8_t) * P_len);
@@ -187,31 +248,57 @@ void sha3_sponge(sha3_input N, size_t N_len, size_t d, sha3_bits b, size_t r)
     P[N_len] = P[P_len - 1] = 1;
     size_t n = P_len / r;
 
-    //
-    size_t c = SHA3_WIDTH[b] * 25 - r;
-    sha3_string S = malloc(sizeof(uint8_t) * SHA3_WIDTH[b]);
-
-    sha3_state_array A;
+    // Rounds
+    sha3_state_array A, B;
     sha3_init_state_array(&A, b);
+    sha3_init_state_array(&B, b);
 
     for (int i = 0; i < P_len; i += r)
     {
-
-        sha3_convert_string_to_state_array(P + i, A, b, r);
-
+        sha3_convert_string_to_state_array(P + i, B, b, r);
+        sha3_state_array_op(A, B, b, sha3_xor);
+        sha3_keccak_f(A, b);
+        //sha3_state_array_print(A, b);
     }
 
+    // Output
+    sha3_string S = malloc(sizeof(uint8_t) * SHA3_WIDTH[b] * 25);
+    sha3_string Z = malloc(sizeof(uint8_t) * d);
+    size_t offset = 0;
+    while (offset < d)
+    {
+        sha3_convert_state_array_to_string(A, S, b);
+        memcpy(Z + offset, S, r < d - offset ? r : d - offset);
+        offset += r;
+        sha3_keccak_f(A, b);
+    }
 
-
-    /*sha3_state_array A;
-    sha3_init_state_array(&A, SHA3_BITS_1600);
-    sha3_convert_string_to_state_array(S, A, b);
-
-    sha3_keccak_f(A, b);
-
-    sha3_convert_state_array_to_string(A, S, b);
-    sha3_destroy_state_array(A);*/
+    // Clear
+    sha3_destroy_state_array(A);
+    sha3_destroy_state_array(B);
+    free(S);
+    free(P);
+    return Z;
 }
+
+inline sha3_string sha3_keccak(sha3_input N, size_t N_len, size_t d, size_t c)
+{
+    return sha3_sponge(N, N_len, d, SHA3_BITS_1600, 25 * SHA3_WIDTH[SHA3_BITS_1600] - c);
+}
+
+inline sha3_string sha3_hash(sha3_input M, size_t M_len, sha3_mode mode)
+{
+    if (mode < 0 || mode > SHA3_512) mode = SHA3_224;
+    size_t N_len = M_len + 2;
+    sha3_input N = malloc(sizeof(uint8_t) * N_len);
+    memcpy(N, M, M_len);
+    N[M_len] = 0;
+    N[M_len + 1] = 1;
+    sha3_string S = sha3_keccak(N, N_len, SHA3_MODE_LEN[mode], SHA3_MODE_LEN[mode] * 2);
+    free(N);
+    return S;
+}
+
 
 
 
