@@ -46,12 +46,13 @@ static uint8_t sha3_temp[5][64] = {};
 
 typedef uint8_t ***sha3_state_array;
 typedef uint8_t *sha3_string;
+typedef uint8_t *sha3_input;
 
 void sha3_init_state_array(sha3_state_array *A, sha3_bits b);
 
 void sha3_destroy_state_array(sha3_state_array A);
 
-void sha3_convert_string_to_state_array(sha3_string S, sha3_state_array A, sha3_bits b);
+void sha3_convert_string_to_state_array(sha3_string S, sha3_state_array A, sha3_bits b, size_t r);
 
 void sha3_convert_state_array_to_string(sha3_state_array A, sha3_string S, sha3_bits b);
 
