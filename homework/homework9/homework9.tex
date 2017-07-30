@@ -129,8 +129,21 @@ So it is proved.
 \section{Reed Solomon codes}
 \begin{enumerate}
 \item
+The Reed Solomon code have three parameters: an alphabet size $q$, a block length $n$ and a message length $k$ with $k<n\leqslant q$. $q$ has to be a prime power so that a finite field of order q can be formed. The block length is usually some constant multiple of the message length and is equal to or one less than the alphabet size, that is, $n=q$ or $n=q-1$.
+
+Every codeword of the Reed Solomon code is a sequence of function values of a polynomial $p$ of degree less than $k$. The message is interpreted as the description of a polynomial $p$ of degree less than $k$ over the finite field $F$ with $q$ elements. In turn, the polynomial p is evaluated at n distinct points $a_1,a_2,\dots,a_n$ of the field F, and the sequence of values is the corresponding codeword. The set $\mathcal{C}$ of codewords of the Reed Solomon code is defined as follows:
+
+$$\mathcal{C}=\{(p(a_1),p(a_1),\dots,p(a_3)\}$$
 
 \item
+Since any two distinct polynomials of degree less than $k$ agree in at most $k-1$ points, this means that any two codewords of the Reed Solomon code disagree in at least $n-k+1$ positions. So the distance $D$ of the Reed-Solomon code is $n-k+1$.
+
+According to Theorem 7.16, we know it is possible to identify a parent of a descendant of $\mathcal{C}\subset(F_q)^n$ if
+$$D>n(1-\frac{1}{w^2})$$
+When $w=2$,
+$$n-k+1>\frac{3}{4}n$$
+So
+$$n>4k-4$$
 \end{enumerate}
 
 \end{document}

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="homework1.ex1"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\homework\;CMake Files\homework\homework1\;CMake Files\homework\homework1\ex1\;CMake Files\homework\homework1\ex3\;CMake Files\homework\homework3\;CMake Files\homework\homework3\ex4\;CMake Files\homework\homework4\;CMake Files\homework\homework4\ex3\;CMake Files\homework\homework4\ex5\;CMake Files\homework\homework5\;CMake Files\homework\homework5\ex2\;CMake Files\homework\homework5\ex3\;CMake Files\homework\homework5\ex4\;CMake Files\homework\homework6\;CMake Files\homework\homework6\ex6\;CMake Files\homework\homework7\;CMake Files\homework\homework7\ex5\;CMake Files\challenges\;CMake Files\challenges\c2\;CMake Files\challenges\c2\cipher1\;CMake Files\challenges\c2\cipher2\;CMake Files\project\;CMake Files\project\project2\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="homework1.ex1">
+				<Option output="/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/homework1.ex1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 homework1.ex1"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="homework1.ex1/fast">
+				<Option output="/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/homework1.ex1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 homework1.ex1/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/liu/SJTU/VE475/cmake-build-release/homework/homework1/ex1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework1/ex1/main.cpp">
+			<Option target="homework1.ex1"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework1/ex1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex1\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework1/ex1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex1\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework1/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework1/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework1\ex3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework3/ex4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework3\ex4\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework3/ex4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework3\ex4\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework4\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework4/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework4\ex3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework4/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework4\ex3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework4/ex5/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework4\ex5\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework4/ex5/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework4\ex5\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/ex2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\ex2\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/ex2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\ex2\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\ex3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/ex3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\ex3\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/ex4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\ex4\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework5/ex4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework5\ex4\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework6/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework6\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework6/ex6/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework6\ex6\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework6/ex6/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework6\ex6\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework7/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework7\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework7/ex5/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework7\ex5\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/homework/homework7/ex5/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\homework\homework7\ex5\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/challenges/c2/cipher1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\challenges\c2\cipher1\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/challenges/c2/cipher1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\challenges\c2\cipher1\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/challenges/c2/cipher2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\challenges\c2\cipher2\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/challenges/c2/cipher2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\challenges\c2\cipher2\"/>
+		</Unit>
+		<Unit filename="/home/liu/SJTU/VE475/project/project2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\project\project2\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
