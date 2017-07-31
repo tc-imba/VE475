@@ -6,7 +6,7 @@
 #include <time.h>
 #include <stdio.h>
 
-void generate_rc()
+void sha3_generate_rc()
 {
     for (int i = 0; i < 255; i++)
     {
