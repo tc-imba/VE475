@@ -1,0 +1,12 @@
+calc(8,9,8,9,11,3,7);
+
+function calc(x1,y1,x2,y2,n,b,c)
+    if x1==x2 && y1==y2
+        m=sym(3*x1^2+b)/sym(2*y1);
+    else
+        m=sym(y2-y1)/sym(x2-x1);
+    end
+    [n,d]=numden(m)
+    d=modinv(d,n);
+    
+end
